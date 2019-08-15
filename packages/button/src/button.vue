@@ -1,12 +1,12 @@
 <template>
   <button
     @click="$emit('click')"
-    class="w__button"
+    class="e8__button"
     :disabled="disabled"
     :class="[
-    'w__button--'+type,
+    'e8__button--'+type,
     {'is-plain': plain, 'is-disabled': disabled, 'is-round': round},
-    'w__button--size-'+size
+    'e8__button--size-'+size
     ]"
   >
     <i v-if="icon !== ''" :class="icon"></i>
@@ -15,7 +15,7 @@
 </template>
 <script>
   export default{
-    name: 'WButton',
+    name: 'E8Button',
     props: {
       type: {
         type: String,

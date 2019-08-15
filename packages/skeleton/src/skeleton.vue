@@ -1,11 +1,11 @@
 <template>
-  <div class="w__skeleton" :style="{background: bgColor, paddingBottom, width}">
+  <div class="e8__skeleton" :style="{background: bgColor, paddingBottom, width}">
   </div>
 </template>
 
 <script>
   export default{
-    name: 'WSkeleton',
+    name: 'E8Skeleton',
     props: {
       proportion: {
         type: Number,

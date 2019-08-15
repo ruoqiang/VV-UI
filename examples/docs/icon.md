@@ -65,25 +65,25 @@
 # Icon 图标
 
 ----
-语义化的矢量图形，```VV-UI``` 使用开源的 Iconfont (阿里妈妈MUX倾力打造的矢量图标管理、交流平台) 作为图标库，并制作成了 ```icon font```。
+语义化的矢量图形，```E8-UI``` 使用开源的 Iconfont (阿里妈妈MUX倾力打造的矢量图标管理、交流平台) 作为图标库，并制作成了 ```icon font```。
 ### 如何使用
 
 使用 ```class="icon"``` 来声明图标，具体图标的名称请 ```copy``` 相应的标签
 
 <div class="demo-block">
-  <i class="w-icon-close fs-24"></i>
-  <i class="w-icon-link fs-24"></i>
-  <i class="w-icon-tag fs-24"></i>
-  <i class="w-icon-smile fs-24"></i>
+  <i class="e8-icon-close fs-24"></i>
+  <i class="e8-icon-link fs-24"></i>
+  <i class="e8-icon-tag fs-24"></i>
+  <i class="e8-icon-smile fs-24"></i>
 </div>
 
 ::: demo
 ```html
 
-<i class="w-icon-close fs-24"></i>
-<i class="w-icon-link fs-24"></i>
-<i class="w-icon-tag fs-24"></i>
-<i class="w-icon-smile fs-24"></i>
+<i class="e8-icon-close fs-24"></i>
+<i class="e8-icon-link fs-24"></i>
+<i class="e8-icon-tag fs-24"></i>
+<i class="e8-icon-smile fs-24"></i>
 
 ```
 :::
@@ -93,8 +93,8 @@
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
     <span>
-      <i :class="'w-' + name"></i>
-      {{'w-' + name}}
+      <i :class="'e8-' + name"></i>
+      {{'e8-' + name}}
     </span>
   </li>
 </ul>

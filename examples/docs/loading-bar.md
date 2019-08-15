@@ -48,17 +48,17 @@
   }
 </script>
 <div class="demo-block">
-   <w-button @click="start">开始</w-button>
-   <w-button @click="end">结束</w-button>
-   <w-button @click="error">错误</w-button>
+   <e8-button @click="start">开始</e8-button>
+   <e8-button @click="end">结束</e8-button>
+   <e8-button @click="error">错误</e8-button>
 </div>
 
 ::: demo
 
 ```html
-<w-button @click="start">开始</w-button>
-<w-button @click="end">结束</w-button>
-<w-button @click="error">错误</w-button>
+<e8-button @click="start">开始</e8-button>
+<e8-button @click="end">结束</e8-button>
+<e8-button @click="error">错误</e8-button>
 <script>
   export default{
     methods: {
@@ -82,19 +82,19 @@
 提供 LoadingBar 的全局配置，使用方法如下：
 
 <div class="demo-block">
-   <w-button @click="setSpeed">设置speed速度</w-button>
-   <w-button @click="setSpinner">设置spinner动画效果</w-button>
-   <w-button @click="setPercentNum">设置percentNum每次加载的比例</w-button>
-   <w-button @click="setShowSpinner">设置是否显示spinner</w-button>
+   <e8-button @click="setSpeed">设置speed速度</e8-button>
+   <e8-button @click="setSpinner">设置spinner动画效果</e8-button>
+   <e8-button @click="setPercentNum">设置percentNum每次加载的比例</e8-button>
+   <e8-button @click="setShowSpinner">设置是否显示spinner</e8-button>
 </div>
 
 ::: demo
 
 ```html
-<w-button @click="setSpeed">设置speed速度</w-button>
-<w-button @click="setSpinner">设置spinner动画效果</w-button>
-<w-button @click="setPercentNum">设置percentNum每次加载的比例</w-button>
-<w-button @click="setShowSpinner">设置是否显示spinner</w-button>
+<e8-button @click="setSpeed">设置speed速度</e8-button>
+<e8-button @click="setSpinner">设置spinner动画效果</e8-button>
+<e8-button @click="setPercentNum">设置percentNum每次加载的比例</e8-button>
+<e8-button @click="setShowSpinner">设置是否显示spinner</e8-button>
 <script>
   export default{
     methods: {

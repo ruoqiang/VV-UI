@@ -1,3 +1,4 @@
+@import "common.css";
 @import "button.css";
 @import "row.css";
 @import "col.css";
@@ -9,3 +10,5 @@
 @import "alert.css";
 @import "loading-bar.css";
 @import "skeleton.css";
+@import "input.css";
+@import "select.css";

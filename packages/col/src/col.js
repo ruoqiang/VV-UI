@@ -3,7 +3,7 @@
  * Date: 17/11/9
  */
 export default {
-  name: 'WCol',
+  name: 'E8Col',
 
   props: {
     span: {
@@ -45,29 +45,29 @@ export default {
       if (this[prop]) {
         classList.push(
           prop !== 'span'
-            ? `w-col-${prop}-${this[prop]}`
-            : `w-col-${this[prop]}`
+            ? `e8-col-${prop}-${this[prop]}`
+            : `e8-col-${this[prop]}`
         );
       }
     });
 
     ['xs', 'sm', 'md', 'lg'].forEach(size => {
       if (typeof this[size] === 'number') {
-        classList.push(`w-col-${size}-${this[size]}`);
+        classList.push(`e8-col-${size}-${this[size]}`);
       } else if (typeof this[size] === 'object') {
         let props = this[size];
         Object.keys(props).forEach(prop => {
           classList.push(
             prop !== 'span'
-              ? `w-col-${size}-${prop}-${props[prop]}`
-              : `w-col-${size}-${props[prop]}`
+              ? `e8-col-${size}-${prop}-${props[prop]}`
+              : `e8-col-${size}-${props[prop]}`
           );
         });
       }
     });
 
     return h(this.tag, {
-      class: ['w-col', classList],
+      class: ['e8-col', classList],
       style
     }, this.$slots.default);
   }

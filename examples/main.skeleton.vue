@@ -1,15 +1,15 @@
 <template>
   <div class="main-skeleton">
-    <w-skeleton height="80px"></w-skeleton>
+    <e8-skeleton height="80px"></e8-skeleton>
     <div>
       <div class="skeleton-container">
         <div class="skeleton">
-          <w-skeleton height="300px"></w-skeleton>
+          <e8-skeleton height="300px"></e8-skeleton>
         </div>
-        <w-skeleton height="45px"></w-skeleton>
+        <e8-skeleton height="45px"></e8-skeleton>
       </div>
       <div class="skeleton-bottom">
-        <w-skeleton height="45px"></w-skeleton>
+        <e8-skeleton height="45px"></e8-skeleton>
       </div>
     </div>
   </div>

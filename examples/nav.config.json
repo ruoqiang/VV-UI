@@ -24,6 +24,12 @@
       "name": "logs",
       "path": "/logs",
       "desc": "更新日志"
+    },
+    {
+      "name": "debugger-demo",
+      "path": "/debugger-demo",
+      "desc": "调试demo",
+      "type": "pages"
     }
   ],
   "组件": [
@@ -86,7 +92,18 @@
           "desc": "skeleton 骨架屏",
           "name": "skeleton",
           "path": "/skeleton"
+        },
+        {
+          "desc": "input 输入框",
+          "name": "input",
+          "path": "/input"
+        },
+        {
+          "desc": "select 选择框",
+          "name": "select",
+          "path": "/select"
         }
+        
       ]
     }
   ]

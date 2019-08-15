@@ -4,46 +4,46 @@
 当文本没有加载出来时，显示文本的默认占位图。
 
 <div class="demo-block">
-  <w-row>
-    <w-col :span="4">
-      <w-skeleton></w-skeleton>
-    </w-col>
-    <w-col :span="4" class="ml-10">
-      <w-row>
-        <w-col :span="12">
-          <w-skeleton :proportion="0.2"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>                  
-      </w-col>  
-    </w-col>
-  </w-row>
+  <e8-row>
+    <e8-col :span="4">
+      <e8-skeleton></e8-skeleton>
+    </e8-col>
+    <e8-col :span="4" class="ml-10">
+      <e8-row>
+        <e8-col :span="12">
+          <e8-skeleton :proportion="0.2"></e8-skeleton>
+        </e8-col>
+        <e8-col :span="24" class="m-10">
+          <e8-skeleton :proportion="0.1"></e8-skeleton>
+        </e8-col>
+        <e8-col :span="24" class="m-10">
+          <e8-skeleton :proportion="0.1"></e8-skeleton>
+        </e8-col>                  
+      </e8-col>  
+    </e8-col>
+  </e8-row>
 </div>
 
 ::: demo
 ```html
-<w-row>
-    <w-col :span="4">
-      <w-skeleton></w-skeleton>
-    </w-col>
-    <w-col :span="4" class="ml-10">
-      <w-row>
-        <w-col :span="12">
-          <w-skeleton :proportion="0.2"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>                  
-      </w-col>  
-    </w-col>
-  </w-row>
+<e8-row>
+    <e8-col :span="4">
+      <e8-skeleton></e8-skeleton>
+    </e8-col>
+    <e8-col :span="4" class="ml-10">
+      <e8-row>
+        <e8-col :span="12">
+          <e8-skeleton :proportion="0.2"></e8-skeleton>
+        </e8-col>
+        <e8-col :span="24" class="m-10">
+          <e8-skeleton :proportion="0.1"></e8-skeleton>
+        </e8-col>
+        <e8-col :span="24" class="m-10">
+          <e8-skeleton :proportion="0.1"></e8-skeleton>
+        </e8-col>                  
+      </e8-col>  
+    </e8-col>
+  </e8-row>
 ```
 :::
 
@@ -75,16 +75,16 @@ module.exports = {
 ```html
 <template>
   <div class="main-skeleton">
-    <w-skeleton height="80px"></w-skeleton>
+    <e8-skeleton height="80px"></e8-skeleton>
     <div>
       <div class="skeleton-container">
         <div class="skeleton">
-          <w-skeleton height="300px"></w-skeleton>
+          <e8-skeleton height="300px"></e8-skeleton>
         </div>
-        <w-skeleton height="45px"></w-skeleton>
+        <e8-skeleton height="45px"></e8-skeleton>
       </div>
       <div class="skeleton-bottom">
-        <w-skeleton height="45px"></w-skeleton>
+        <e8-skeleton height="45px"></e8-skeleton>
       </div>
     </div>
   </div>

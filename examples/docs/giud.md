@@ -2,7 +2,7 @@
 
 ----
 
-`VV-UI` 是一款基于 `Vue.js 2.0` 的前端 UI 组件库，主要用于快速开发 PC 网站中后台产品
+`E8-UI` 是一款基于 `Vue.js 2.0` 的前端 UI 组件库，主要用于快速开发 PC 网站中后台产品
 
 ## 特性
 
@@ -16,7 +16,3 @@
 - [Electron](http://electron.atom.io/)
 - [NW.js](http://nwjs.io)
 
-
-## 贡献
-
-如果你在使用 `VV-UI` 时遇到问题，或者有好的建议，欢迎给我们提 [Issue](https://github.com/VV-UI/VV-UI/issues) 或 [Pull Request](https://github.com/VV-UI/VV-UI/pulls)

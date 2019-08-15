@@ -36,7 +36,7 @@
   --color-base-gray: color(var(--color-base-black) s(28%) l(86%));
   --color-light-gray: color(var(--color-base-black) h(+10) s(33%) l(92%));
   --color-extra-light-gray: color(var(--color-base-black) h(+6) s(33%) l(95%));
-
+  
   /* Link
   -------------------------- */
   --link-color: var(--color-extra-light-black);
@@ -163,6 +163,8 @@
   -------------------------- */
   --select-border-color-hover: var(--border-color-hover);
   --select-disabled-border: var(--disabled-border-base);
+  --select-disabled-background: rgb(245, 247, 250);
+  
   --select-font-size: var(--font-size-base);
   --select-close-hover-color: var(--color-light-silver);
 
@@ -195,6 +197,8 @@
   --select-dropdown-empty-padding: 10px 0;
   --select-dropdown-border: solid 1px var(--disabled-border-base);
 
+  --select-selected-item-bj-color: rgb(235, 239, 244);
+  
   /* Alert
   -------------------------- */
   --alert-padding: 8px 16px;

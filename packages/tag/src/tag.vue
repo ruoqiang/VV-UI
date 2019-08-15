@@ -1,15 +1,15 @@
 <template>
-  <transition name="w-zoom-in-center">
-    <div class="w__tag" :class="'w__tag--'+color">
-      <span class="w__tag--desc"><slot></slot></span>
-      <i class="w-icon-close2 w__tag--close" v-if="closable" @click="hiddenTag"></i>
+  <transition name="e8-zoom-in-center">
+    <div class="e8__tag" :class="'e8__tag--'+color">
+      <span class="e8__tag--desc"><slot></slot></span>
+      <i class="e8-icon-close2 e8__tag--close" v-if="closable" @click="hiddenTag"></i>
     </div>
   </transition>
 </template>
 
 <script>
   export default{
-    name: 'WTag',
+    name: 'E8Tag',
     props: {
       closable: Boolean,
       color: {

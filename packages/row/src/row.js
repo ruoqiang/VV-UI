@@ -1,7 +1,7 @@
 export default {
-    name: 'WRow',
+    name: 'E8Row',
   
-    componentName: 'WRow',
+    componentName: 'E8Row',
   
     props: {
       tag: {
@@ -36,10 +36,10 @@ export default {
     render(h) {
       return h(this.tag, {
         class: [
-          'w-row',
+          'e8-row',
           this.justify !== 'start' ? `is-justify-${this.justify}` : '',
           this.align !== 'top' ? `is-align-${this.align}` : '',
-          { 'w-row--flex': this.type === 'flex' }
+          { 'e8-row--flex': this.type === 'flex' }
         ],
         style: this.style
       }, this.$slots.default);

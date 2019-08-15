@@ -10,4 +10,3 @@ Col.install = function(Vue) {
 };
 
 export default Col;
-

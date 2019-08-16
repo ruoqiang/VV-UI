@@ -3,7 +3,7 @@
     <div class="index-container">
       <Input value="122" :clearable="true" @on-input="inputHnaderrr" />
     </div>
-    <e8-select placeholder='文本框' :clearable="true" ></e8-select>
+    <e8-select placeholder='文本框' :clearable="true" :options="options"></e8-select>
   </div>
 </template>
 
@@ -12,7 +12,9 @@ import Input from '../../packages/input';
 import E8Select from '../../packages/select';
 export default {
   data() {
-    return {};
+    return {
+      options: [{value: '1', label: 'New York1'}, {value: '2', label: 'New York2'}]
+    };
   },
   methods: {
     inputHnaderrr(e) {

@@ -30,22 +30,16 @@ export default {
     value: { type: [String, Object, Number, Array] },
     deleteItem: ""
   },
-  inject: ['deleteItem'],
+  inject: ['app'],
   data() {
     return {
       clearableValue: this.clearable,
       dropDownShow: false,
       options: this.value
-      // [
-      //   { id: "1", text: "newYork1" },
-      //   { id: "2", text: "newYork2" }
-      // ]
     };
   },
   created() {
-    // this.options.forEach((item, index) => {
-    //   this.$set(this.options[index], "isSelect", false);
-    // });
+    // console.log('this.app---',this.app)
   },
   methods: {
     handleClear() {
@@ -66,19 +60,28 @@ export default {
     },
     show() {
       this.dropDownShow = true;
+      console.log('this.app---show',this.app)
     },
     hide() {
       this.dropDownShow = false;
+       console.log('this.app---hide',this.app)
     },
     selectFn(e, item) {
-      if (!this.multiple) {
+      if (!this.multiple) { // 单选
         this.hide();
         this.$refs.listItem.forEach(item=> {
-          item['className'] = ''
+          item['className'] = '';
+          e.target.className = "selected"; 
         })
+      } else { // 多选
+        if(e.target.className == "") {
+          e.target.className = "selected"; 
+        }else {
+           e.target.className = "";
+        }
       }
-      e.target.className = "selected";
       this.$emit("on-select", item);
+      console.log('this.app---selectFn',this.app)
     },
     getDeleteIndexInArr(data,keyValue,keyField) {
       let index = null

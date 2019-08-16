@@ -16,7 +16,7 @@
         @blur="blurInputHandler"
         :class="[{'disabled':disabled}]"
       />
-      <div class="e8__input multiple" v-else>
+      <div class="e8__input multiple" v-else ref="multiple">
         <div v-if="selectedItem.length===0">{{placeholder}}</div>
         <span
           v-for="item in selectedItem"
@@ -39,7 +39,7 @@
         <slot name="append"><i class="e8-icon-down arrow-down" :class="[{'is-reverse':isDropShow}]"></i></slot>
       </div>
       <E8Option
-        :value="options"
+        :value="optionss"
         @on-select="onSelect"
         ref="e8Option"
         :keyField="keyField"
@@ -52,16 +52,19 @@
 </template>
 <script>
 import E8Option from "./option";
+
+let dropDownTop = 0;
+
 export default {
   name: "E8Select",
   provide: {
-    deleteItem: this.deleteItem
+    app: this
   },
   props: {
     placeholder: { type: String, default: "请选择" },
     keyField: { type: String, default: "value" },
     showField: { type: String, default: "label" },
-    value: { type: [String, Object, Number, Array] },
+    options: { type: [String, Object, Number, Array] },
     multiple: { type: Boolean, default: false },
     labelText: {
       type: String,
@@ -94,7 +97,7 @@ export default {
       isFocus: true,
       tabindex: 0, //让元素可以获得、失去焦点
       clearableValue: this.clearable,
-      options: this.value,
+      optionss: this.options,
       selectedValue: "",
       selectedItem: [],
       deleteItem: "",
@@ -107,10 +110,11 @@ export default {
       this.selectedValue = "";
       if (this.multiple) {
         this.selectedItem = [];
-        this.$refs.e8Option.deleteAllSelectedStyle();
       }
+      this.$refs.e8Option.deleteAllSelectedStyle();
       this.isDropShow = false
       this.$emit("on-clear");
+      this.setDropDownPositon();
     },
     focusHandler(e) {
       this.$emit("on-focus");
@@ -124,6 +128,7 @@ export default {
       this.deleteItem = keyValue;
 
       this.$refs.e8Option.deleteCurrentSelectedStyle(this.deleteItem);
+      this.setDropDownPositon();
     },
     deleteItemByKeyValue(data, keyValue, keyField) {
       //options2:[{id: '1',text: 'New York1'},{id: '2',text: 'New York2'},], ===> 根据id为1去删除一项
@@ -155,14 +160,34 @@ export default {
         this.$emit("on-select", this.selectedValue);
       } else {
         // 多选下拉
-        if (
-          !this.ListIsNotContainItem(this.selectedItem, item[this.keyField])
-        ) {
+        if ( !this.ListIsNotContainItem(this.selectedItem, item[this.keyField])) {
           // 列表内没有该项才添加
           this.selectedItem.push(item);
-          this.$emit("on-select", this.selectedItem);
+        } else { // 有则删除
+          this.selectedItem = this.deleteItemByKeyValue(this.selectedItem, item[this.keyField],this.keyField);
         }
+        // console.log(this.selectedItem)
+        this.$emit("on-select", this.selectedItem);
       }
+      this.setDropDownPositon()
+    },
+    setDropDownPositon(components) {
+      if(!this.multiple) return;
+      this.$nextTick(()=> {
+        let top = this.$refs.multiple.getBoundingClientRect().height;
+        if(dropDownTop ==top) return //top值发生改变了才会设置style.top
+        let $dropDown = this.$refs.e8Option.$el;
+        $dropDown.style.top = top+ 'px';
+        //屏幕高度 - 选择框底部相对于屏幕位置 < dropDown高度  ==>dropDown往上方显示
+        // let screenHeigh = document.documentElement.clientHeight
+        // let multipleBottom = this.$refs.multiple.getBoundingClientRect().bottom
+        // let dropDownheight = this.$refs.e8Option.$el.getBoundingClientRect().height
+        // if(screenHeigh - multipleBottom < dropDownheight) {
+        //   console.log('woyao')
+        // }
+        // console.log('改变了top')
+        dropDownTop = top;
+      })
     },
     ListIsNotContainItem(arr, itemId) {
       let result = false;
@@ -199,7 +224,7 @@ export default {
       if (!this.isFocus) {
         visible = false;
       }
-      console.log("------------", this.selectedItem);
+      // console.log("------------", this.selectedItem);
       return visible;
     }
   },

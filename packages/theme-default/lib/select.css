@@ -213,6 +213,7 @@
   right: 2px;
   top: 0px;
   cursor: pointer;
+  color: #5e6d82;
 }
 .e8__input--size-large{
   padding: 11px 20px;
@@ -248,7 +249,7 @@
 .dropDown {
   position: absolute;
   left: 0;
-  top: 34px;
+  top: 36px;
   z-index: 2;
   width: 100%;
   max-height: 200px;
@@ -261,6 +262,7 @@
   box-shadow: 0 1px 6px rgba(0,0,0,.2);
   position: absolute;
   z-index: 900;
+  transition: top 0.1s ease-in;
 }
 .dropDown ul {
   margin: 0;
@@ -288,6 +290,12 @@
   /* transform: skewX(-30deg); */
   -ms-transform: skewX(-20deg);
       transform: skewX(-20deg);
+}
+.dropDown.normal{
+  top: 36px;
+}
+.dropDown.dropup{
+  bottom: 36px;
 }
 .disabled{
   /* pointer-events: none; */

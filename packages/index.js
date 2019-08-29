@@ -14,6 +14,7 @@ import WLoadingBar from './loading-bar/index'
 import Skeleton from './skeleton/index'
 import Input from './input/index'
 import Select from './select/index'
+import DatePicker from './date-picker/index'
 
 const components = [
   E8Button,
@@ -22,6 +23,7 @@ const components = [
   E8Tag,
   Input,
   Select,
+  DatePicker,
   WShowMore,
   WLimitTextArea,
   WAlert,

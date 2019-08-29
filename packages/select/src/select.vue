@@ -52,7 +52,7 @@
 </template>
 <script>
 import E8Option from "./option";
-
+import {utilIsArray} from '../../utils/util'
 let dropDownTop = 0;
 
 export default {
@@ -89,7 +89,8 @@ export default {
     clearable: {
       type: [Boolean, Object],
       default: false
-    }
+    },
+    defaultValue: ""
   },
   data() {
     return {
@@ -98,8 +99,8 @@ export default {
       tabindex: 0, //让元素可以获得、失去焦点
       clearableValue: this.clearable,
       optionss: this.options,
-      selectedValue: "",
       selectedItem: [],
+      selectedValue: '',
       deleteItem: "",
       isDropShow: false
     };
@@ -126,7 +127,6 @@ export default {
         this.keyField
       );
       this.deleteItem = keyValue;
-
       this.$refs.e8Option.deleteCurrentSelectedStyle(this.deleteItem);
       this.setDropDownPositon();
     },
@@ -140,10 +140,28 @@ export default {
       });
       return newData;
     },
+    //通过id: '1' 确定某一项item，然后调用option selectFn
+    getItemByKeyValue(data,keyValue,keyField) {
+      if(!utilIsArray(keyValue)) keyValue = [keyValue]
+      let newData = data.slice();
+      // let ret = newData.filter((item,i)=> item[keyField] == keyValue)
+      let ret = []
+      keyValue.forEach(keyValueItem=> {
+        newData.forEach((itemm,i)=> {
+          if(itemm[keyField] == keyValueItem) {
+            ret.push(itemm)
+          }
+        })
+      })
+      if(!ret.length) console.warn('你传入的默认值defaultValue：'+keyValue+ ' 对应的选项不在下拉列表数据中')
+      return ret
+    },
     blurInputHandler(event) {
       this.$emit("on-blur", this.selectedValue);
       setTimeout(() => {
         //item事件改为mousedown后就不需要延时了  后来又把mousedown改成click为了点击切换显示隐藏，因为外层是click内层mousedown.stop无效，必须click.stop才可以
+        // 另外为单选时才有input的blurInputHandler事件，
+         // ---> mousedown事件先于click执行
         this.$refs.e8Option.hide();
       }, 300);
     },
@@ -174,18 +192,21 @@ export default {
     setDropDownPositon(components) {
       if(!this.multiple) return;
       this.$nextTick(()=> {
-        let top = this.$refs.multiple.getBoundingClientRect().height;
-        if(dropDownTop ==top) return //top值发生改变了才会设置style.top
+        // if(dropDownTop ==top) return //top值发生改变了才会设置style.top
         let $dropDown = this.$refs.e8Option.$el;
-        $dropDown.style.top = top+ 'px';
         //屏幕高度 - 选择框底部相对于屏幕位置 < dropDown高度  ==>dropDown往上方显示
-        // let screenHeigh = document.documentElement.clientHeight
-        // let multipleBottom = this.$refs.multiple.getBoundingClientRect().bottom
-        // let dropDownheight = this.$refs.e8Option.$el.getBoundingClientRect().height
-        // if(screenHeigh - multipleBottom < dropDownheight) {
-        //   console.log('woyao')
-        // }
-        // console.log('改变了top')
+        let screenHeigh = document.documentElement.clientHeight
+        let multipleBottom = this.$refs.multiple.getBoundingClientRect().bottom
+        let dropDownheight = this.$refs.e8Option.$el.getBoundingClientRect().height
+        if(screenHeigh - multipleBottom < dropDownheight) {
+          // console.log('woyao')
+           let top = -(dropDownheight + 10);
+           $dropDown.style.top = top+ 'px';
+        } else {
+          let top = this.$refs.multiple.getBoundingClientRect().height;
+          $dropDown.style.top = top+ 'px';
+        }
+        // console.log('改变了top') //----------------->待做：都使用top 动态计算一下位置吧
         dropDownTop = top;
       })
     },
@@ -199,8 +220,6 @@ export default {
       });
       return result;
     },
-    getSelectedValueByxx(arr, key) {},
-    getSelectedValue(arr, key) {},
     clickSelectWrap() {
       if (this.disabled) {
         return;
@@ -212,9 +231,13 @@ export default {
         this.$refs.e8Option.show();
         this.isDropShow = true;
       }
+      this.setDropDownPositon();
+    },
+    getCurrentDefaultSelectedItem() {
+      return this.currentDefaultSelectedItem
     }
   },
-  computed: {
+   computed: {
     _showClear() {
       let visible =
         this.clearable &&
@@ -226,6 +249,25 @@ export default {
       }
       // console.log("------------", this.selectedItem);
       return visible;
+    }
+  },
+  watch: {
+    defaultValue: {
+      handler(val) {
+        if(val) {
+          let currentDefaultSelectedItem = this.getItemByKeyValue(this.optionss,val,this.keyField)
+          if(currentDefaultSelectedItem.length) 
+          {
+             this.currentDefaultSelectedItem = currentDefaultSelectedItem
+             this.selectedValue = this.currentDefaultSelectedItem.map((item,i)=> item[this.showField])
+             this.selectedItem = this.currentDefaultSelectedItem
+              this.$nextTick(()=> {
+                this.$refs.e8Option.setCurrentItemClassLight(currentDefaultSelectedItem);
+              })
+          }
+        }
+      },
+      immediate: true
     }
   },
   components: {

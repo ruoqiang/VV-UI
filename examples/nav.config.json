@@ -102,6 +102,11 @@
           "desc": "select 选择框",
           "name": "select",
           "path": "/select"
+        },
+        {
+          "desc": "date-picker 日期选择",
+          "name": "date-picker",
+          "path": "/date-picker"
         }
         
       ]

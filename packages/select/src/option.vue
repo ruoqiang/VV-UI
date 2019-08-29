@@ -8,6 +8,8 @@
         :key="item[keyField]"
         :data-keyField="item[keyField]"
         @click.stop="selectFn($event,item)"
+        @mousedown="selectFn2($event,item)"
+        :class="[{'selected':item['selected']}]"
       >{{item[showField]}}</li>
     </ul>
   </div>
@@ -35,10 +37,14 @@ export default {
     return {
       clearableValue: this.clearable,
       dropDownShow: false,
-      options: this.value
+      options: this.value,
+      currentDefaultSelectedItem:[]
     };
   },
   created() {
+    
+  },
+  mounted() {
     // console.log('this.app---',this.app)
   },
   methods: {
@@ -60,11 +66,11 @@ export default {
     },
     show() {
       this.dropDownShow = true;
-      console.log('this.app---show',this.app)
+      // console.log('this.app---show',this.app)
     },
     hide() {
       this.dropDownShow = false;
-       console.log('this.app---hide',this.app)
+      //  console.log('this.app---hide',this.app)
     },
     selectFn(e, item) {
       if (!this.multiple) { // 单选
@@ -82,6 +88,30 @@ export default {
       }
       this.$emit("on-select", item);
       console.log('this.app---selectFn',this.app)
+    },
+     selectFn2(e, item) { //该方法仅测试mousedown与click的执行顺序
+      
+      console.log('this.app---selectFn2',this.app)
+    },
+    // currentDefaultSelectedItem(item) {
+    //    console.log('currentDefaultSelectedItem',item)
+    // },
+    setCurrentItemClassLight(selectedItems) {
+       console.log('selectedItem--',selectedItems);
+       this.currentDefaultSelectedItem = selectedItems;
+       let newData = this.options.slice();
+       selectedItems.forEach(item => {
+         newData.forEach((itemm,idx)=> {
+           if(item[this.keyField]==itemm[this.keyField]) {
+             itemm['selected'] = true // 这里修改的是同一份数据options -->导致数据修改了 所有引用这个数据的下拉状态都会跟着变====》 option数据源不要相同就行
+            //  this.$set(this.options[idx],'selected',true)
+           }
+         })
+       })
+      //  console.log('-------------',newData)
+       this.options = newData
+
+        console.log('-------------options',this.options)
     },
     getDeleteIndexInArr(data,keyValue,keyField) {
       let index = null

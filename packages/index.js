@@ -15,8 +15,9 @@ import Skeleton from './skeleton/index'
 import Input from './input/index'
 import Select from './select/index'
 import DatePicker from './date-picker/index'
+import AutoComplete from './auto-complete/index'
 
-const components = [
+const components = [ // 这里注册了就可以全局直接使用了，不用每次需要使用的时候导入再注册带当前页面
   E8Button,
   E8Row,
   E8Col,
@@ -24,6 +25,7 @@ const components = [
   Input,
   Select,
   DatePicker,
+  AutoComplete,
   WShowMore,
   WLimitTextArea,
   WAlert,
@@ -49,6 +51,7 @@ export default {
   E8Tag,
   Input,
   Select,
+  AutoComplete,
   WShowMore,
   WLimitTextArea,
   MetaInfo,

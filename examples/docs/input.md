@@ -5,7 +5,7 @@
 
 <script>
   //验证例子组件的可用性
-import Input from '../../packages/input';
+// import Input from '../../packages/input';  全局注册了这么没有必要单独再引入注册一次了
 export default {
   data() {
     return {};
@@ -19,7 +19,7 @@ export default {
     }
   },
   components: {
-    Input
+    // Input
   }
 };
 </script>

@@ -3,7 +3,7 @@
 ### 单选下拉选择框 auto-complete自动完成
 
 <script>
-  //验证例子组件的可用性  如果这里不引入组件与定义事件 直接使用的话 事件会失效(尤其是组件里还有子组件的时候)
+  //验证例子组件的可用性  如果这里不引入组件与定义事件 直接使用的话 事件会失效(尤其是组件里还有子组件的时候) --->index.js里面全局注册一下就好哦了
 import Input from '../../packages/input';
 import E8Select from '../../packages/select';
 import E8AutoComplete from '../../packages/auto-complete/'

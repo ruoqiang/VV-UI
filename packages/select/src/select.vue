@@ -15,6 +15,7 @@
         :placeholder="placeholder"
         @blur="blurInputHandler"
         :class="[{'disabled':disabled}]"
+        @input="filterValueChange"
       />
       <div class="e8__input multiple" v-else ref="multiple">
         <div v-if="selectedItem.length===0">{{placeholder}}</div>
@@ -31,12 +32,23 @@
             @click.stop="deleteValueItem(item[keyField])"
           ></i>
         </span>
+        <input
+          type="text"
+          v-if="multiple && filterable"
+          @input="filterValueChange"
+          :value="filterValue"
+          class="filterable-input"
+          ref="multipleChildInput"
+        />
+        <!-- <div v-if="multiple && filterable" contentEditable="true" @input="filterValueChange" class="filterable-input">{{filterValue}}</div> -->
       </div>
       <div class="e8-select-append">
         <div class="e8-input-clear" v-if="_showClear" @click.stop="handleClear">
           <i class="e8-icon-closefill"></i>
         </div>
-        <slot name="append"><i class="e8-icon-down arrow-down" :class="[{'is-reverse':isDropShow}]"></i></slot>
+        <slot name="append">
+          <i class="e8-icon-down arrow-down" :class="[{'is-reverse':isDropShow}]"></i>
+        </slot>
       </div>
       <E8Option
         :value="optionss"
@@ -45,6 +57,9 @@
         :keyField="keyField"
         :multiple="multiple"
         :showField="showField"
+        :filterable="filterable"
+        :filterValue="filterValue"
+        :selectedItems="selectedItem"
       />
       <!--  :deleteItem="deleteItem" -->
     </div>
@@ -52,7 +67,7 @@
 </template>
 <script>
 import E8Option from "./option";
-import {utilIsArray} from '../../utils/util'
+import { utilIsArray } from "../../utils/util";
 let dropDownTop = 0;
 
 export default {
@@ -90,6 +105,11 @@ export default {
       type: [Boolean, Object],
       default: false
     },
+    filterable: {
+      type: [Boolean, Object],
+      default: false
+    },
+
     defaultValue: ""
   },
   data() {
@@ -100,20 +120,56 @@ export default {
       clearableValue: this.clearable,
       optionss: this.options,
       selectedItem: [],
-      selectedValue: '',
+      selectedValue: "",
       deleteItem: "",
-      isDropShow: false
+      isDropShow: false,
+      filterValue: ""
     };
   },
   created() {},
+  mounted() {
+    var that = this;
+    const multiple = this.$refs["multiple"];
+    const handler = event => {
+      let dom = event.target; //点击的dom元素
+      let dom2 = event.target; //点击的dom元素
+      // console.log(dom);
+      // console.log(dom.className);
+
+      let flag = false;
+      while (dom) {
+        //判断点击的元素是否在multiple范围内，自己也算
+        if (dom === multiple) {
+          flag = true;
+          break;
+        }
+        dom = dom.parentNode;
+      }
+
+      if (flag && dom2.className == "e8__input multiple") {
+        this.$refs["multipleChildInput"] &&
+          this.$refs["multipleChildInput"].focus();
+      }
+      if (!flag && dom2.className.indexOf('dropDownList')=== -1) {
+          that.isDropShow = flag;
+          that.$refs.e8Option.hide();
+        }
+      // document.removeEventListener("click", handler, true);
+    };
+    document.addEventListener("click", handler, true);
+  },
   methods: {
+    filterValueChange(e) {
+      this.filterValue = e.target.value;
+      this.selectedValue = e.target.value;
+    },
     handleClear() {
       this.selectedValue = "";
       if (this.multiple) {
         this.selectedItem = [];
       }
       this.$refs.e8Option.deleteAllSelectedStyle();
-      this.isDropShow = false
+      this.isDropShow = false;
       this.$emit("on-clear");
       this.setDropDownPositon();
     },
@@ -141,74 +197,87 @@ export default {
       return newData;
     },
     //通过id: '1' 确定某一项item，然后调用option selectFn
-    getItemByKeyValue(data,keyValue,keyField) {
-      if(!utilIsArray(keyValue)) keyValue = [keyValue]
+    getItemByKeyValue(data, keyValue, keyField) {
+      if (!utilIsArray(keyValue)) keyValue = [keyValue];
       let newData = data.slice();
       // let ret = newData.filter((item,i)=> item[keyField] == keyValue)
-      let ret = []
-      keyValue.forEach(keyValueItem=> {
-        newData.forEach((itemm,i)=> {
-          if(itemm[keyField] == keyValueItem) {
-            ret.push(itemm)
+      let ret = [];
+      keyValue.forEach(keyValueItem => {
+        newData.forEach((itemm, i) => {
+          if (itemm[keyField] == keyValueItem) {
+            ret.push(itemm);
           }
-        })
-      })
-      if(!ret.length) console.warn('你传入的默认值defaultValue：'+keyValue+ ' 对应的选项不在下拉列表数据中')
-      return ret
+        });
+      });
+      if (!ret.length)
+        console.warn(
+          "你传入的默认值defaultValue：" +
+            keyValue +
+            " 对应的选项不在下拉列表数据中"
+        );
+      return ret;
     },
     blurInputHandler(event) {
       this.$emit("on-blur", this.selectedValue);
       setTimeout(() => {
         //item事件改为mousedown后就不需要延时了  后来又把mousedown改成click为了点击切换显示隐藏，因为外层是click内层mousedown.stop无效，必须click.stop才可以
         // 另外为单选时才有input的blurInputHandler事件，
-         // ---> mousedown事件先于click执行
+        // ---> mousedown事件先于click执行
         this.$refs.e8Option.hide();
       }, 300);
     },
     handleWrapBlur(event) {
       this.$refs.e8Option.hide();
-      this.isDropShow = false
+      this.isDropShow = false;
     },
     onSelect(item) {
       if (!this.multiple) {
         // 单选下拉
         this.selectedItem = item;
         this.selectedValue = item[this.showField];
-        this.isDropShow = false
+        this.isDropShow = false;
         this.$emit("on-select", this.selectedValue);
       } else {
         // 多选下拉
-        if ( !this.ListIsNotContainItem(this.selectedItem, item[this.keyField])) {
+        if (
+          !this.ListIsNotContainItem(this.selectedItem, item[this.keyField])
+        ) {
           // 列表内没有该项才添加
           this.selectedItem.push(item);
-        } else { // 有则删除
-          this.selectedItem = this.deleteItemByKeyValue(this.selectedItem, item[this.keyField],this.keyField);
+        } else {
+          // 有则删除
+          this.selectedItem = this.deleteItemByKeyValue(
+            this.selectedItem,
+            item[this.keyField],
+            this.keyField
+          );
         }
         // console.log(this.selectedItem)
         this.$emit("on-select", this.selectedItem);
       }
-      this.setDropDownPositon()
+      this.setDropDownPositon();
     },
     setDropDownPositon(components) {
-      if(!this.multiple) return;
-      this.$nextTick(()=> {
+      if (!this.multiple) return;
+      this.$nextTick(() => {
         // if(dropDownTop ==top) return //top值发生改变了才会设置style.top
         let $dropDown = this.$refs.e8Option.$el;
         //屏幕高度 - 选择框底部相对于屏幕位置 < dropDown高度  ==>dropDown往上方显示
-        let screenHeigh = document.documentElement.clientHeight
-        let multipleBottom = this.$refs.multiple.getBoundingClientRect().bottom
-        let dropDownheight = this.$refs.e8Option.$el.getBoundingClientRect().height
-        if(screenHeigh - multipleBottom < dropDownheight) {
+        let screenHeigh = document.documentElement.clientHeight;
+        let multipleBottom = this.$refs.multiple.getBoundingClientRect().bottom;
+        let dropDownheight = this.$refs.e8Option.$el.getBoundingClientRect()
+          .height;
+        if (screenHeigh - multipleBottom < dropDownheight) {
           // console.log('woyao')
-           let top = -(dropDownheight + 10);
-           $dropDown.style.top = top+ 'px';
+          let top = -(dropDownheight + 10);
+          $dropDown.style.top = top + "px";
         } else {
           let top = this.$refs.multiple.getBoundingClientRect().height;
-          $dropDown.style.top = top+ 'px';
+          $dropDown.style.top = top + "px";
         }
         // console.log('改变了top') //----------------->待做：都使用top 动态计算一下位置吧
         dropDownTop = top;
-      })
+      });
     },
     ListIsNotContainItem(arr, itemId) {
       let result = false;
@@ -224,6 +293,11 @@ export default {
       if (this.disabled) {
         return;
       }
+      if (this.filterable) {
+        this.$refs.e8Option.show();
+        this.isDropShow = true;
+        return;
+      }
       if (this.isDropShow) {
         this.$refs.e8Option.hide();
         this.isDropShow = false;
@@ -234,10 +308,10 @@ export default {
       this.setDropDownPositon();
     },
     getCurrentDefaultSelectedItem() {
-      return this.currentDefaultSelectedItem
+      return this.currentDefaultSelectedItem;
     }
   },
-   computed: {
+  computed: {
     _showClear() {
       let visible =
         this.clearable &&
@@ -254,16 +328,23 @@ export default {
   watch: {
     defaultValue: {
       handler(val) {
-        if(val) {
-          let currentDefaultSelectedItem = this.getItemByKeyValue(this.optionss,val,this.keyField)
-          if(currentDefaultSelectedItem.length) 
-          {
-             this.currentDefaultSelectedItem = currentDefaultSelectedItem
-             this.selectedValue = this.currentDefaultSelectedItem.map((item,i)=> item[this.showField])
-             this.selectedItem = this.currentDefaultSelectedItem
-              this.$nextTick(()=> {
-                this.$refs.e8Option.setCurrentItemClassLight(currentDefaultSelectedItem);
-              })
+        if (val) {
+          let currentDefaultSelectedItem = this.getItemByKeyValue(
+            this.optionss,
+            val,
+            this.keyField
+          );
+          if (currentDefaultSelectedItem.length) {
+            this.currentDefaultSelectedItem = currentDefaultSelectedItem;
+            this.selectedValue = this.currentDefaultSelectedItem.map(
+              (item, i) => item[this.showField]
+            );
+            this.selectedItem = this.currentDefaultSelectedItem;
+            this.$nextTick(() => {
+              this.$refs.e8Option.setCurrentItemClassLight(
+                currentDefaultSelectedItem
+              );
+            });
           }
         }
       },

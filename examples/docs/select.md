@@ -14,6 +14,8 @@ export default {
       options3:[{value: '1',label: 'New York1'},{value: '2',label: 'New York2'},{value: '3',label: 'New York3'},{value: '4',label: 'New York2'},{value: '5',label: 'New York3'},{value: '6',label: 'New York3'},{value: '7',label: 'New York7'},{value: '8',label: 'New York3'}],
       options4:[{id: '1',text: 'New York1'},{id: '2',text: 'New York2'},{id: '3',text: 'New York3'},{id: '4',text: 'New York5'},],
       options6:[{value: '1',label: 'New York1'},{value: '2',label: 'New York2'},],
+      options7:[{value: '1',label: 'New York1 York1 York1'},{value: '2',label: 'New York2'},{value: '3',label: '上海人民观测哈哈哈'},{value: '4',label: '上海人民观测哈哈哈海2'},{value: '5',label: '上海35455555445'},{value: '6',label: '上海3都是对的的士速递'},{value: '7',label: '上海3都是对的的士速递二人'},],
+      options8:[{value: '1',label: 'New York1'},{value: '2',label: 'New York2'},{value: '3',label: '上海'},{value: '4',label: '上海2'},{value: '5',label: '上海3'},],
       defaultValue1: '1',
       defaultValue2: ['1','2']
     };
@@ -122,7 +124,7 @@ export default {
 <div class="demo-block">
   <div class="m-10">
     <e8-row  type="flex" justify="space-between">
-      <e8-select :multiple="true" placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options" ></e8-select>
+      <e8-select :multiple="true" placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options"></e8-select>
     </e8-row>
   </div>
   <div class="m-10">
@@ -215,6 +217,43 @@ export default {
 };
 ```
 :::
+
+
+### 可搜索的拉选择框
+<div class="demo-block">
+ <div class="m-10">
+    <e8-row  type="flex" justify="space-between">
+        <e8-col :span="12">
+            <e8-select :multiple="true" placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options7" :filterable="true" :clearable="true"></e8-select>
+        </e8-col>
+        <e8-col :span="6">
+            <e8-select  placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options8"  :filterable="true" :clearable="true"></e8-select>
+        </e8-col>
+    </e8-row>
+</div>
+</div>
+
+::: demo
+```html
+<div>
+  <e8-select :multiple="true" placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options7" :filterable="true" :clearable="true"></e8-select>
+  <e8-select  placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options8"  :filterable="true" :clearable="true"></e8-select>
+  ...
+</div>
+export default {
+  data() {
+    return {
+      options:[{value: '1',label: 'New York1'},{value: '2',label: 'New York2'},],
+      options2:[{id: '1',text: 'New York1'},{id: '2',text: 'New York2'},{id: '3',text: 'New York3'},{id: '4',text: 'New York5'},],
+      options3:[{value: '1',label: 'New York1'},{value: '2',label: 'New York2'},{value: '3',label: 'New York3'},{value: '4',label: 'New York2'},{value: '5',label: 'New York3'},{value: '6',label: 'New York3'},{value: '7',label: 'New York7'},{value: '8',label: 'New York3'}]
+    };
+  },
+};
+```
+:::
+
+
+
 
 ### Attributes
 

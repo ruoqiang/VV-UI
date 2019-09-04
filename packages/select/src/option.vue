@@ -2,8 +2,9 @@
   <!-- v-show="dropDownShow"  -->
   <div class="dropDown" :style="{'display':dropDownShow? 'block':'none'}">
     <ul>
-      <li
-      ref="listItem"
+      <li v-show="options.length>0"
+        class="dropDownList"
+        ref="listItem"
         v-for="item in options"
         :key="item[keyField]"
         :data-keyField="item[keyField]"
@@ -11,11 +12,13 @@
         @mousedown="selectFn2($event,item)"
         :class="[{'selected':item['selected']}]"
       >{{item[showField]}}</li>
+      <li v-show="options.length===0">暂无匹配结果</li>
     </ul>
   </div>
 </template>
 <script>
 import { deleteItemByKeyValue } from "../../utils/util";
+let _thisPageSelectedItems = []
 export default {
   name: "E8Option",
   props: {
@@ -30,20 +33,21 @@ export default {
     keyField: { type: String, default: "value" },
     showField: { type: String, default: "label" },
     value: { type: [String, Object, Number, Array] },
-    deleteItem: ""
+    deleteItem: "",
+    filterValue: { type: String, default: "" },
+    selectedItems:{ type: [String, Object, Number, Array] }
   },
-  inject: ['app'],
+  inject: ["app"],
   data() {
     return {
       clearableValue: this.clearable,
       dropDownShow: false,
       options: this.value,
-      currentDefaultSelectedItem:[]
+      currentDefaultSelectedItem: [],
+      // filterValued: this.filterValue
     };
   },
-  created() {
-    
-  },
+  created() {},
   mounted() {
     // console.log('this.app---',this.app)
   },
@@ -72,70 +76,105 @@ export default {
       this.dropDownShow = false;
       //  console.log('this.app---hide',this.app)
     },
-    selectFn(e, item) {
-      if (!this.multiple) { // 单选
-        this.hide();
-        this.$refs.listItem.forEach(item=> {
-          item['className'] = '';
-          e.target.className = "selected"; 
-        })
-      } else { // 多选
-        if(e.target.className == "") {
-          e.target.className = "selected"; 
-        }else {
-           e.target.className = "";
+    deleteItemByKeyValue(data, keyValue, keyField) {
+      //options2:[{id: '1',text: 'New York1'},{id: '2',text: 'New York2'},], ===> 根据id为1去删除一项
+      let newData = data.slice();
+      newData.forEach((item, index) => {
+        if (keyValue == item[keyField]) {
+          newData.splice(index, 1);
         }
+      });
+      return newData;
+    },
+    selectFn(e, item) {
+      if (!this.multiple) {
+        // 单选
+        this.hide();
+        this.$refs.listItem.forEach(item => {
+          item["className"] = "dropDownList";
+          e.target.className = "dropDownList selected";
+        });
+      } else {
+        
+        // 多选
+        if (e.target.className == "dropDownList") {
+          e.target.className = "dropDownList selected";
+          // 没有则添加
+          _thisPageSelectedItems.push(item)
+        } else {
+          e.target.className = "dropDownList";
+           // 有则删除
+          _thisPageSelectedItems = this.deleteItemByKeyValue(
+            _thisPageSelectedItems,
+            item[this.keyField],
+            this.keyField
+          );
+        }
+        this.setCurrentItemClassLight(_thisPageSelectedItems)
+        console.log(item)
+        console.log(this.selectedItems)
       }
       this.$emit("on-select", item);
-      console.log('this.app---selectFn',this.app)
     },
-     selectFn2(e, item) { //该方法仅测试mousedown与click的执行顺序
-      
-      console.log('this.app---selectFn2',this.app)
+    selectFn2(e, item) {
+      //该方法仅测试mousedown与click的执行顺序
     },
-    // currentDefaultSelectedItem(item) {
-    //    console.log('currentDefaultSelectedItem',item)
-    // },
     setCurrentItemClassLight(selectedItems) {
-       console.log('selectedItem--',selectedItems);
-       this.currentDefaultSelectedItem = selectedItems;
-       let newData = this.options.slice();
-       selectedItems.forEach(item => {
-         newData.forEach((itemm,idx)=> {
-           if(item[this.keyField]==itemm[this.keyField]) {
-             itemm['selected'] = true // 这里修改的是同一份数据options -->导致数据修改了 所有引用这个数据的下拉状态都会跟着变====》 option数据源不要相同就行
+      this.currentDefaultSelectedItem = selectedItems;
+      let newData = this.options.slice();
+      if(!this.multiple) selectedItems = []
+      selectedItems.forEach(item => {
+        newData.forEach((itemm, idx) => {
+          if (item[this.keyField] == itemm[this.keyField]) {
+            itemm["selected"] = true; // 这里修改的是同一份数据options -->导致数据修改了 所有引用这个数据的下拉状态都会跟着变====》 option数据源不要相同就行
             //  this.$set(this.options[idx],'selected',true)
-           }
-         })
-       })
-      //  console.log('-------------',newData)
-       this.options = newData
-
-        console.log('-------------options',this.options)
+          }
+        });
+      });
+      this.options = newData;
     },
-    getDeleteIndexInArr(data,keyValue,keyField) {
-      let index = null
-      data.forEach((item,i)=> {
-        if(item[keyField] == keyValue) {
-          index = i
-          return true
+    getDeleteIndexInArr(data, keyValue, keyField) {
+      let index = null;
+      data.forEach((item, i) => {
+        if (item[keyField] == keyValue) {
+          index = i;
+          return true;
         }
-      })
-      return index
+      });
+      return index;
     },
-    deleteCurrentSelectedStyle(val) { //如果删除的2次是同一个就会导致watch不触发的bug------>1.用广播的形式通知，只有删除了就父组件就通知子组件,,2.父组件里面直接通过refs调用子组件方法
+    deleteCurrentSelectedStyle(val) {
+      //如果删除的2次是同一个就会导致watch不触发的bug------>1.用广播的形式通知，只有删除了就父组件就通知子组件,,2.父组件里面直接通过refs调用子组件方法
       //根据索引确定数组哪一个被删除了，去掉对应的高亮class
-      let index = this.getDeleteIndexInArr(this.options,val,this.keyField)
-      this.$refs.listItem[index]['className'] = ''
+      let index = this.getDeleteIndexInArr(this.options, val, this.keyField);
+      this.$refs.listItem[index]["className"] = "dropDownList";
     },
     deleteAllSelectedStyle() {
-      this.$refs.listItem.forEach(item=> {
-        item['className'] = ''
-      })
+      this.$refs.listItem.forEach(item => {
+        item["className"] = "dropDownList";
+      });
     }
   },
-  watch: {
-    
+  watch: { //watch 直接监听父组件传递到子组件的prop值
+    filterValue: { 
+      handler(newValue, oldValue) {
+        console.log("newValue---", newValue);
+        // console.log("oldValue---", oldValue);
+        if(!this.optionsClone) this.optionsClone = this.options
+        this.options = this.optionsClone.filter((item)=> {
+          return item[this.showField].toLowerCase().indexOf(newValue.toLowerCase()) != -1
+        })
+       
+        // console.log("this.options---", this.options);
+        // console.log("this.selectedItems---", this.selectedItems);
+        if(!this.multiple &&!newValue) {
+          this.options = this.optionsClone
+          this.deleteAllSelectedStyle()
+        }
+        this.setCurrentItemClassLight(this.selectedItems)
+      },
+      // immediate: true
+    }
   },
   computed: {}
 };

@@ -236,7 +236,7 @@ export default {
 ::: demo
 ```html
 <div>
-  <e8-select :multiple="true" placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options7" :filterable="true" :clearable="true"></e8-select>
+  <e8-select :multiple="true"  @on-select="onSelectedFn2" :options="options7" :filterable="true" :clearable="true"></e8-select>
   <e8-select  placeholder='不带清除按钮的下拉' @on-select="onSelectedFn2" :options="options8"  :filterable="true" :clearable="true"></e8-select>
   ...
 </div>
@@ -268,8 +268,7 @@ export default {
 | label-directionIsUp  |是否让标签在选择框上方面 | Boolean   |  —  |  false   |
 | label-text  |label文本 | String   |  —  |  —   |
 | keyField、show-Field  |下拉数据的每一项key、value字段显示，当后台提交字段时需要id/text | String   |  —  |  value/label   |
-
-
+| filterable  |是否可以过滤匹配 | Boolean   |  —  |  false  |
 
 
 ### Select events

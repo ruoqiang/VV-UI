@@ -18,7 +18,7 @@
         @input="filterValueChange"
       />
       <div class="e8__input multiple" v-else ref="multiple">
-        <div v-if="selectedItem.length===0">{{placeholder}}</div>
+        <div v-show="selectedItem.length===0">{{placeholderr}}</div>
         <span
           v-for="item in selectedItem"
           :key="item[keyField]"
@@ -32,6 +32,7 @@
             @click.stop="deleteValueItem(item[keyField])"
           ></i>
         </span>
+        <!-- <div style="flex:1;"></div> -->
         <input
           type="text"
           v-if="multiple && filterable"
@@ -39,8 +40,9 @@
           :value="filterValue"
           class="filterable-input"
           ref="multipleChildInput"
+          :style="{'width':multipleChildInputWidth}"
         />
-        <!-- <div v-if="multiple && filterable" contentEditable="true" @input="filterValueChange" class="filterable-input">{{filterValue}}</div> -->
+        <!-- <div v-if="multiple && filterable" contentEditable="true" @input="filterValueChange" class="filterable-input" ref="multipleChildInput">{{filterValue}}</div> -->
       </div>
       <div class="e8-select-append">
         <div class="e8-input-clear" v-if="_showClear" @click.stop="handleClear">
@@ -123,7 +125,9 @@ export default {
       selectedValue: "",
       deleteItem: "",
       isDropShow: false,
-      filterValue: ""
+      filterValue: "",
+      placeholderr:this.placeholder,
+      multipleChildInputWidth:"0.75em"
     };
   },
   created() {},
@@ -133,9 +137,7 @@ export default {
     const handler = event => {
       let dom = event.target; //点击的dom元素
       let dom2 = event.target; //点击的dom元素
-      // console.log(dom);
-      // console.log(dom.className);
-
+      
       let flag = false;
       while (dom) {
         //判断点击的元素是否在multiple范围内，自己也算
@@ -149,10 +151,11 @@ export default {
       if (flag && dom2.className == "e8__input multiple") {
         this.$refs["multipleChildInput"] &&
           this.$refs["multipleChildInput"].focus();
+          // this.placeholderr =''
       }
       if (!flag && dom2.className.indexOf('dropDownList')=== -1) {
           that.isDropShow = flag;
-          that.$refs.e8Option.hide();
+          that.$refs.e8Option && that.$refs.e8Option.hide();
         }
       // document.removeEventListener("click", handler, true);
     };
@@ -162,16 +165,20 @@ export default {
     filterValueChange(e) {
       this.filterValue = e.target.value;
       this.selectedValue = e.target.value;
+      
     },
     handleClear() {
       this.selectedValue = "";
+
       if (this.multiple) {
         this.selectedItem = [];
       }
+      if(this.filterable) this.filterValue = ''
       this.$refs.e8Option.deleteAllSelectedStyle();
       this.isDropShow = false;
       this.$emit("on-clear");
       this.setDropDownPositon();
+      this.placeholderr = this.placeholder
     },
     focusHandler(e) {
       this.$emit("on-focus");
@@ -349,6 +356,13 @@ export default {
         }
       },
       immediate: true
+    },
+    selectedValue(val) {
+      this.multipleChildInputWidth = `${this.selectedValue ? this.selectedValue.length * 1 :  0.75}em`  
+      
+      // if(!this.selectedValue.length){
+      //   this.placeholderr = this.placeholder
+      // }
     }
   },
   components: {

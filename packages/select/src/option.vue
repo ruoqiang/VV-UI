@@ -1,8 +1,8 @@
 <template>
-  <!-- v-show="dropDownShow"  -->
   <div class="dropDown" :style="{'display':dropDownShow? 'block':'none'}">
     <ul>
-      <li v-show="options.length>0"
+      <li
+        v-show="options.length>0"
         class="dropDownList"
         ref="listItem"
         v-for="item in options"
@@ -18,7 +18,8 @@
 </template>
 <script>
 import { deleteItemByKeyValue } from "../../utils/util";
-let _thisPageSelectedItems = []
+let _thisPageSelectedItems = [];
+let cloneDataBak = null;
 export default {
   name: "E8Option",
   props: {
@@ -35,7 +36,7 @@ export default {
     value: { type: [String, Object, Number, Array] },
     deleteItem: "",
     filterValue: { type: String, default: "" },
-    selectedItems:{ type: [String, Object, Number, Array] }
+    selectedItems: { type: [String, Object, Number, Array] }
   },
   inject: ["app"],
   data() {
@@ -43,13 +44,12 @@ export default {
       clearableValue: this.clearable,
       dropDownShow: false,
       options: this.value,
-      currentDefaultSelectedItem: [],
+      currentDefaultSelectedItem: []
       // filterValued: this.filterValue
     };
   },
-  created() {},
-  mounted() {
-    // console.log('this.app---',this.app)
+  created() {
+    cloneDataBak = this.options;
   },
   methods: {
     handleClear() {
@@ -70,11 +70,9 @@ export default {
     },
     show() {
       this.dropDownShow = true;
-      // console.log('this.app---show',this.app)
     },
     hide() {
       this.dropDownShow = false;
-      //  console.log('this.app---hide',this.app)
     },
     deleteItemByKeyValue(data, keyValue, keyField) {
       //options2:[{id: '1',text: 'New York1'},{id: '2',text: 'New York2'},], ===> 根据id为1去删除一项
@@ -95,24 +93,21 @@ export default {
           e.target.className = "dropDownList selected";
         });
       } else {
-        
         // 多选
         if (e.target.className == "dropDownList") {
           e.target.className = "dropDownList selected";
           // 没有则添加
-          _thisPageSelectedItems.push(item)
+          _thisPageSelectedItems.push(item);
         } else {
           e.target.className = "dropDownList";
-           // 有则删除
+          // 有则删除
           _thisPageSelectedItems = this.deleteItemByKeyValue(
             _thisPageSelectedItems,
             item[this.keyField],
             this.keyField
           );
         }
-        this.setCurrentItemClassLight(_thisPageSelectedItems)
-        console.log(item)
-        console.log(this.selectedItems)
+        this.setCurrentItemClassLight(_thisPageSelectedItems);
       }
       this.$emit("on-select", item);
     },
@@ -121,13 +116,13 @@ export default {
     },
     setCurrentItemClassLight(selectedItems) {
       this.currentDefaultSelectedItem = selectedItems;
+      cloneDataBak;
       let newData = this.options.slice();
-      if(!this.multiple) selectedItems = []
+      if (!this.multiple) selectedItems = [];
       selectedItems.forEach(item => {
         newData.forEach((itemm, idx) => {
           if (item[this.keyField] == itemm[this.keyField]) {
             itemm["selected"] = true; // 这里修改的是同一份数据options -->导致数据修改了 所有引用这个数据的下拉状态都会跟着变====》 option数据源不要相同就行
-            //  this.$set(this.options[idx],'selected',true)
           }
         });
       });
@@ -150,30 +145,38 @@ export default {
       this.$refs.listItem[index]["className"] = "dropDownList";
     },
     deleteAllSelectedStyle() {
-      this.$refs.listItem.forEach(item => {
-        item["className"] = "dropDownList";
+      _thisPageSelectedItems = [];
+      let hah = this.options.map(item => {
+        if (item["selected"]) item["selected"] = false;
+        return item;
       });
+      if (!this.multiple) {
+        this.$refs.listItem.forEach(item => {
+          item["className"] = "dropDownList";
+        });
+      }
     }
   },
-  watch: { //watch 直接监听父组件传递到子组件的prop值
-    filterValue: { 
+  watch: {
+    //watch 直接监听父组件传递到子组件的prop值
+    filterValue: {
       handler(newValue, oldValue) {
-        console.log("newValue---", newValue);
-        // console.log("oldValue---", oldValue);
-        if(!this.optionsClone) this.optionsClone = this.options
-        this.options = this.optionsClone.filter((item)=> {
-          return item[this.showField].toLowerCase().indexOf(newValue.toLowerCase()) != -1
-        })
+        if (!this.optionsClone) this.optionsClone = this.options;
+        this.options = this.optionsClone.filter(item => {
+          return (
+            item[this.showField]
+              .toLowerCase()
+              .indexOf(newValue.toLowerCase()) != -1
+          );
+        });
        
-        // console.log("this.options---", this.options);
-        // console.log("this.selectedItems---", this.selectedItems);
-        if(!this.multiple &&!newValue) {
-          this.options = this.optionsClone
-          this.deleteAllSelectedStyle()
+        if (this.multiple && !newValue) {
+          this.options = this.optionsClone;
+          this.deleteAllSelectedStyle();
         }
-        this.setCurrentItemClassLight(this.selectedItems)
+        this.setCurrentItemClassLight(this.selectedItems);
       },
-      // immediate: true
+      immediate: true
     }
   },
   computed: {}

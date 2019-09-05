@@ -1,5 +1,5 @@
 <template>
-  <div class="directionRow" >
+  <div class="directionRow AutoComplete" >
    <E8Select 
    :options="optionss"
    :placeholder="placeholderr"
@@ -11,7 +11,7 @@
    :disabled="disabledd"
    :clearable="clearablee"
    :defaultValue="defaultValuee"
-
+   :filterable="filterablee"
    />
     
   </div>
@@ -60,28 +60,34 @@ export default {
   },
   data() {
     return {
-      disabledInput: true,
-      isFocus: true,
-      tabindex: 0, //让元素可以获得、失去焦点
-      clearableValue: this.clearable,
       optionss: this.options,
-      selectedItem: [],
-      selectedValue: '',
-      deleteItem: "",
-      isDropShow: false
+      placeholderr: this.placeholder,
+      keyFieldd: this.showField,
+      showFieldd: this.showField,
+      multiplee: this.multiple,
+      labelTextt: this.labelText,
+      labelDirectionIsUpp: this.labelDirectionIsUp,
+      disabledd: this.disabled,
+      clearablee: this.clearable,
+      defaultValuee: this.defaultValue,
+      // filterablee: this.filterable,
+      filterablee:true
+      // filterablee: true
     };
   },
   created() {
-    this.optionss = this.options
-    this.placeholderr = this.placeholder
-    this.keyFieldd = this.keyField
-    this.showFieldd = this.showField
-    this.multiplee = this.multiple
-    this.labelTextt = this.labelText
-    this.labelDirectionIsUpp = this.labelDirectionIsUp
-    this.disabledd = this.disabled
-    this.clearablee = this.clearable
-    this.defaultValuee = this.defaultValue
+    // this.optionss = this.options
+    // this.placeholderr = this.placeholder
+    // this.keyFieldd = this.keyField
+    // this.showFieldd = this.showField
+    // this.multiplee = this.multiple
+    // this.labelTextt = this.labelText
+    // this.labelDirectionIsUpp = this.labelDirectionIsUp
+    // this.disabledd = this.disabled
+    // this.clearablee = this.clearable
+    // this.defaultValuee = this.defaultValue
+    // this.filterablee = this.filterable
+    
     
   },
   methods: {

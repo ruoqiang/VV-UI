@@ -109,9 +109,14 @@
           "path": "/date-picker"
         },
         {
-          "desc": "auto-complete 自动完成",
+          "desc": "autoComplete自动完成",
           "name": "auto-complete",
           "path": "/auto-complete"
+        },
+        {
+          "desc": "table 表格",
+          "name": "table",
+          "path": "/table"
         }
         
       ]

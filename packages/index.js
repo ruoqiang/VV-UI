@@ -16,6 +16,7 @@ import Input from './input/index'
 import Select from './select/index'
 import DatePicker from './date-picker/index'
 import AutoComplete from './auto-complete/index'
+import Table from './table/index'
 
 const components = [ // 这里注册了就可以全局直接使用了，不用每次需要使用的时候导入再注册带当前页面
   E8Button,
@@ -26,6 +27,7 @@ const components = [ // 这里注册了就可以全局直接使用了，不用�
   Select,
   DatePicker,
   AutoComplete,
+  Table,
   WShowMore,
   WLimitTextArea,
   WAlert,
@@ -38,7 +40,7 @@ const install = function (Vue) {
   MetaInfo.install(Vue)
   Vue.prototype.$loading = WLoadingBar  // 然后可以全局使用this.$loading.start()
 }
-
+/* 支持使用标签的方式引入 */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
@@ -52,6 +54,7 @@ export default {
   Input,
   Select,
   AutoComplete,
+  Table,
   WShowMore,
   WLimitTextArea,
   MetaInfo,

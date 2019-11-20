@@ -42,6 +42,15 @@ function GeneratorRows(_h, type, list, itemNum) {
 
 export default Vue.component('panel', {
   functional: true,
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    },
+    type: {
+      type: String
+    }
+  },
   render: function (_h, context) {
     const {
       data: list,
@@ -77,14 +86,6 @@ export default Vue.component('panel', {
 
     return result
     // return GeneratorRows(_h, type, list, num)
-  },
-  props: {
-    data: {
-      type: Array,
-      default: () => []
-    },
-    type: {
-      type: String
-    }
   }
+ 
 })

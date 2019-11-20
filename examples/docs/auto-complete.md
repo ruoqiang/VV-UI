@@ -59,6 +59,8 @@ export default {
 ::: demo
 ```html
 <div>
+  <e8-auto-complete placeholder='不带清除按钮的下拉'  @on-select="onSelectedFn" :filterable="true" :options="options6" ></e8-auto-complete>
+  <e8-auto-complete :disabled="true" placeholder='禁用的下拉' @on-select="onSelectedFn2" :options="options2" key-field="id" show-field="text"></e8-auto-complete>
   ...
 </div>
 ```
@@ -82,7 +84,8 @@ export default {
 ::: demo
 ```html
 <div>
-
+  <e8-auto-complete :multiple="true" placeholder='不带清除按钮的下拉' :options="options"  :clearable="true"></e8-auto-complete>
+  <e8-auto-complete :multiple="true" placeholder='不带清除按钮的下拉' :options="options3"  :clearable="true"></e8-auto-complete>
   ...
 </div>
 
@@ -106,7 +109,7 @@ export default {
 
 
 
-### Select events
+### events
 
 
 | 事件名      | 说明    | 返回值      |
@@ -116,7 +119,7 @@ export default {
 | on-input  |input值改变时事件 | input的值   | 
 | on-clear  |clear时事件 | 无   | 
 
-### Select methods
+###  methods
 
 | 方法名      | 说明    | 返回值      |
 |---------- |:--------:|---------- |

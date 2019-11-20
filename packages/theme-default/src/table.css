@@ -1,0 +1,61 @@
+@import "common/var.css";
+
+
+  table {
+    border-collapse: collapse;
+  }
+  table td,
+  table th {
+    border-bottom: 1px solid #ebeef5;
+    padding: 8px 0;
+    min-width: 0;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+    border-collapse: separate;
+  }
+  tr {
+    display: table-row;
+    /* display: flex; */
+    vertical-align: inherit;
+    border-color: inherit;
+    background-color: #fff;
+  }
+  
+  table.striped tr:nth-child(2n-1) {
+    background: #f8f8f9;
+  }
+  table tbody tr:hover {
+    background-color: #ecf5ff;
+  }
+  table.striped tbody tr:hover {
+    background: #ecf5ff;
+  }
+  table.border tbody tr td,table.border thead tr th {
+    border-right: 1px solid #e8eaec;
+  }
+  table.border tbody tr td:first-child,table.border thead tr th:first-child {
+    border-left: 1px solid #e8eaec;
+  }
+  table.border thead tr th {
+    border-top: 1px solid #e8eaec;
+  }
+  .cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .table-overflowY {
+    overflow-y: scroll;
+}
+  
+.e8__table__wrap{
+  overflow: hidden;
+}

@@ -18,20 +18,6 @@ export default {
         isPopperShow(column) {
             return column.filters && ((!this.fixed && !column.fixed) || (this.fixed === 'left' && column.fixed === 'left') || (this.fixed === 'right' && column.fixed === 'right'));
         },
-        setCellWidth(column) {
-            let width = '';
-            if (column.width) {
-                width = column.width;
-            } 
-            // else if (this.columnsWidth[column._index]) {
-            //     width = this.columnsWidth[column._index].width;
-            // }
-            else if (width === '0') {
-                width = ''; 
-            } else {
-                width = '100' //根据cell宽度计算td宽度待做
-            }
-            return width;
-        }
+        
     }
 };

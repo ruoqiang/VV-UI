@@ -210,34 +210,47 @@ export default {
 
 <div class="demo-block">
   <div>
-    <e8-table :columns="columns" :data="data6" ></e8-table>
+    <!-- <e8-table :columns="columns" :data="data6" ></e8-table> -->
   </div>
   <div class="m-10">
      带斑马线的表格
   </div>
   <div class="m-10">
     <e8-row  type="flex" justify="space-between">
-      <e8-table :columns="columns2" :data="data6" isStriped="true"></e8-table>
+      <e8-table :columns="columns" :data="data6" is-striped="true" ></e8-table>
     </e8-row>
       
   </div>
+  
    <div class="m-10">
      带边框线的表格
   </div>
- <div class="m-10">
+  <div class="m-10">
     <e8-row  type="flex" justify="space-between">
-      <e8-table :columns="columns" :data="data6" isBorder="true" isStriped="true"></e8-table>
+      <e8-table :columns="columns" :data="data6" is-border="true" is-striped="true" ></e8-table>
     </e8-row>
-      
+  </div>
+  <div class="m-10">
+     可横线滚动
+  </div>
+  <div class="m-10">
+    <e8-row  type="flex" justify="space-between">
+      <e8-table :columns="columns2" :data="data6" is-border="true" is-striped="true" width="100%"></e8-table>
+    </e8-row>
+  </div>
+  <div class="m-10">
+    <e8-row  type="flex" justify="space-between">
+      <e8-table :columns="columns2" :data="data6" is-border="true" is-striped="true" width="1000"></e8-table>
+    </e8-row>
   </div>
 </div>
 
 ::: demo
 ```html
 <div>
-  <e8-table :columns="columns" :data="data6" ></e8-table>
-  <e8-table :columns="columns" :data="data6" isStriped="true"></e8-table>
-  <e8-table :columns="columns" :data="data6" isBorder="true" isStriped="true"></e8-table>
+  <!-- <e8-table :columns="columns" :data="data6" ></e8-table>
+  <e8-table :columns="columns" :data="data6" is-striped="true"></e8-table>
+  <e8-table :columns="columns" :data="data6" is-border="true" is-striped="true"></e8-table> -->
   ...
 </div>
 ```
@@ -245,7 +258,7 @@ export default {
 
 ### 固定表头
 <div class="demo-block">
-  <e8-table :columns="columns" :data="data7" isStriped="true" height="250"></e8-table>
+  <e8-table :columns="columns" :data="data7" isStriped="true" height="250" ></e8-table>
    <div class="m-10">
    
   </div>
@@ -360,10 +373,10 @@ Input 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | data     | 类型   | Array    |   表格数据 |     —    |
 | isStriped     | 是否带斑马线   | Boolean    | — | false   |
 | is-border     | 是否带表格的边框线   | Boolean    | — | false   |
-| disabled  | 是否禁用状态    | Boolean   | —   | false   |
-| clearable  |是否带清除图标 | Boolean   |  —  |  false  |
-| label-text  |label文本 | String   |  —  |  —   |
-| is-textarea  |是否为textarea,其他属性基本跟Input组件一致 | Boolean   |  —  |  false   |
+| width  | 有宽度x轴滚动    | string/number   | —   | —    |
+| defaultCellWidth  | 有x轴滚动时的每个td的宽度   | string/number   | —   | 100   |
+| height  |有高度y轴滚动  | string/number   | —   | -   |
+
 
 
 

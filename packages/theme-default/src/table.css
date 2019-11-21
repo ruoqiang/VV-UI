@@ -1,6 +1,6 @@
 @import "common/var.css";
 
-
+.e8__table__wrap{width: 100%;}
   table {
     border-collapse: collapse;
   }
@@ -53,9 +53,11 @@
     padding-right: 10px;
   }
   .table-overflowY {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 }
-  
+  .table-overflowX{
+    overflow-x: scroll !important;
+  }
 .e8__table__wrap{
   overflow: hidden;
 }

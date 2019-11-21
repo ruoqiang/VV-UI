@@ -1,97 +1,96 @@
-:root {
-    /* Transition
+:root{
+/* Transition
   -------------------------- */
-    /* Colors
+/* Colors
   -------------------------- */
-    /* Link
+/* Link
   -------------------------- */
-    /* Border
+/* Border
   -------------------------- */
-    /* Box-shadow
+/* Box-shadow
   -------------------------- */
-    /* Fill
+/* Fill
   -------------------------- */
-    /* Font
+/* Font
   -------------------------- */
-    /* Size
+/* Size
   -------------------------- */
-    /* z-index
+/* z-index
   -------------------------- */
-    /* Disable base
+/* Disable base
   -------------------------- */
-    /* Icon
+/* Icon
   -------------------------- */
-    /* Checkbox
+/* Checkbox
   -------------------------- */
-    /* Radio
+/* Radio
   -------------------------- */
-    /* LimitTeaxtarea
+/* LimitTeaxtarea
   ------------------------------------------*/
-    /* Select
+/* Select
   -------------------------- */
-    /* Alert
+/* Alert
   -------------------------- */
-    /* Message Box
+/* Message Box
   -------------------------- */
-    /* Message
+/* Message
   -------------------------- */
-    /* Notification
+/* Notification
   -------------------------- */
-    /* Input
+/* Input
   -------------------------- */
-    /* Cascader
+/* Cascader
   -------------------------- */
-    /* Group
+/* Group
   -------------------------- */
-    /* Tab
+/* Tab
   -------------------------- */
-    /* Button
+/* Button
   -------------------------- */
-    /* cascader
+/* cascader
   -------------------------- */
-    /* Switch
+/* Switch
  -------------------------- */
-    /* Dialog
+/* Dialog
  -------------------------- */
-    /* Table
+/* Table
  -------------------------- */
-    /* Pagination
+/* Pagination
  -------------------------- */
-    /* Popover
+/* Popover
  -------------------------- */
-    /* Tooltip
+/* Tooltip
   -------------------------- */
-    /* Tag
+/* Tag
   -------------------------- */
-    /* Dropdown
+/* Dropdown
   -------------------------- */
-    /* Badge
+/* Badge
   -------------------------- */
-    /* Card
+/* Card
   --------------------------*/
-    /* Slider
+/* Slider
   --------------------------*/
-    /* Steps
+/* Steps
   --------------------------*/
-    /* Menu
+/* Menu
   --------------------------*/
-    /* Rate
+/* Rate
   --------------------------*/
-    /* DatePicker
+/* DatePicker
   --------------------------*/
-    /* Loading
+/* Loading
   --------------------------*/
-    /* Scrollbar
+/* Scrollbar
   --------------------------*/
-    /* Carousel
+/* Carousel
   --------------------------*/
-    /* Collapse
+/* Collapse
   --------------------------*/
-    /* Transfer
-  --------------------------*/
-}
+/* Transfer
+  --------------------------*/}
 
-
+.e8__table__wrap{width: 100%;}
   table {
     border-collapse: collapse;
   }
@@ -143,9 +142,11 @@
     padding-right: 10px;
   }
   .table-overflowY {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 }
-  
+  .table-overflowX{
+    overflow-x: scroll !important;
+  }
 .e8__table__wrap{
   overflow: hidden;
 }

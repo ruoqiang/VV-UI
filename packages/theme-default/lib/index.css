@@ -1,3 +1,10 @@
+.e8-row:before, .e8-row:after {
+    display: table;
+    content: "";
+}
+.e8-row:after {
+    clear: both;
+}
 ul {
     list-style-type: none;
 }
@@ -395,13 +402,6 @@ li {
 .e8-row {
     position: relative;
     box-sizing: border-box;
-}
-.e8-row:before, .e8-row:after {
-    display: table;
-    content: "";
-}
-.e8-row:after {
-    clear: both;
 }
 .e8-row--flex {
     display: -ms-flexbox;
@@ -4256,6 +4256,9 @@ li {
     /* Transfer
   --------------------------*/
 }
+.e8__table__wrap {
+    width: 100%;
+}
 table {
     border-collapse: collapse;
 }
@@ -4306,7 +4309,10 @@ table.border thead tr th {
     padding-right: 10px;
 }
 .table-overflowY {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
+}
+.table-overflowX {
+    overflow-x: scroll !important;
 }
 .e8__table__wrap {
     overflow: hidden;

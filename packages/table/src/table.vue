@@ -8,13 +8,13 @@
     <div class="e8__table">
       <table :class="[{'border':isBorder}]" :style="[tableWrapHeight,tableWrapWidth]">
         <colgroup>
-          <!-- <col  ><col ><col  ><col  > -->
           <col v-for="(column,index) in cells" :key="index" :width="setCellWidth(column)" />
         </colgroup>
         <thead>
           <tr>
             <th v-for="(column,index) in cells" :key="index">
-              <div class="cell">{{column.title}}</div>
+              <!-- <div class="cell">{{column.title}}</div> -->
+              <header-cell :column="column"></header-cell>
             </th>
           </tr>
         </thead>
@@ -28,16 +28,17 @@
     >
       <table :class="[{'striped':isStriped},{'border':isBorder}]" :style="[tableWrapWidth]">
         <colgroup>
-          <!-- <col  width="180"><col  width="180"><col  width="180"><col  width="280"> -->
           <col v-for="(column,index) in cells" :key="index" :width="setCellWidth(column)" />
         </colgroup>
         <tbody>
-          <tr v-for="(item,index) in data" :key="index">
-            <!-- <td  v-for="(title,idex) in columnsTitles" :key="idex">
-              <div class="cell">{{item[title]}}</div>
-            </td>-->
-            <td v-for="(column,idex) in cells" :key="idex">
-              <div class="cell">{{item[column['key']]}}</div>
+          
+          <tr v-for="(item,index) in renderData" :key="index">
+            <td v-for="(column,idex) in cells" :key="idex" >
+               
+               <!-- <template v-if="column.type==='slot'">
+                <slot-scope :row="item" :column="column" :index="idex" :slot="idex"></slot-scope>
+              </template> -->
+              <template><cell :row="item" :column="column"></cell></template>
             </td>
           </tr>
         </tbody>
@@ -50,9 +51,16 @@
 <script>
 import mixin from "./mixin";
 import { deepCopy } from "../../utils/util";
+import cell from './cell'
+import headerCell from './headerCell'
 export default {
   name: "E8Table",
   mixins: [mixin],
+  provide () {
+            return {
+                tableRoot: this
+            };
+        },
   props: {
     isStriped: false,
     isBorder: false,
@@ -62,10 +70,11 @@ export default {
     width: {
       type: [Number, String]
     },
-    defaultCellWidth:{
+    defaultCellWidth: {
       type: [Number, String],
-      default:100
+      default: 100
     },
+    cellType: String,
     columns: Array,
     data: Array
   },
@@ -73,22 +82,17 @@ export default {
     return {
       tableWidth: this.width,
       cells: [],
-      reduceTableWidth:0
+      reduceTableWidth: 0,
+      renderData: this.data
     };
   },
   mounted() {
-    // thi = this.columnsTitles
-    this.makeData();
-
     this.$nextTick(() => {
       this.initTable();
     });
   },
   methods: {
-    handleClear() {
-      this.inputValue = "";
-      this.$emit("on-clear");
-    },
+   
     makeData() {
       let data = deepCopy(this.data);
       data.forEach((row, index) => {
@@ -113,10 +117,24 @@ export default {
       return width;
     },
     initTable() {
-      let tableWidth = this.$refs.tableWrap.clientWidth;
-      let reduceCellWidth = 0;
-      let reduceCellCount = 0;
-      let totalCellCount = this.columns.length;
+      let cellWidth = this.getTableCellWidth();
+      let cloums = deepCopy(this.columns);
+      if (this.width) {
+        this.getScrollTableWidthAndSetDefaultCellWidth(cloums);
+      } else {
+        this.getNormalTableWidthAndSetCellWidth(cloums, cellWidth);
+      }
+      this.cells = cloums;
+    },
+    getTableCellWidth() {
+      let tableWidth 
+      if(!this.$refs.tableWrap) {
+       return
+      }
+      tableWidth = this.$refs.tableWrap.clientWidth
+      let reduceCellWidth = 0,
+        reduceCellCount = 0,
+        totalCellCount = this.columns.length;
       this.columns.forEach(item => {
         if (item.width) {
           reduceCellWidth += item.width;
@@ -125,39 +143,31 @@ export default {
       });
       let otherCellCount = totalCellCount - reduceCellCount;
       let otherCellTotalWidth =
-        tableWidth - reduceCellWidth - this.getScrollBarWidth();
-      let cellWidth = otherCellTotalWidth / otherCellCount;
-
-      this.getScrollBarWidth();
-
-      let cloums = deepCopy(this.columns);
-      let reduceTableWidth = 0
-      if (this.width) {
-        cloums.forEach(item => {
-          if (!item.width) {
-            item.width = parseInt(this.defaultCellWidth);
-          }
-          reduceTableWidth += item.width
-        });
-        this.reduceTableWidth = reduceTableWidth
-      } else {
-        cloums.forEach(item => {
-          if (!item.width) {
-            item.width = cellWidth;
-          }
-        });
-      }
-      this.cells = cloums;
-
-      console.log(this.columns);
-      console.log(reduceCellWidth);
-      console.log(reduceCellCount);
+        tableWidth - (reduceCellWidth + this.getScrollBarWidth());
+      return otherCellTotalWidth / otherCellCount;
     },
-    // calculateCellWidth() {}
+    getScrollTableWidthAndSetDefaultCellWidth(cloums) {
+      let reduceTableWidth = 0;
+      cloums.forEach(item => {
+        if (!item.width) {
+          item.width = parseInt(this.defaultCellWidth);
+        }
+        reduceTableWidth += item.width;
+      });
+      this.reduceTableWidth = reduceTableWidth;
+    },
+    getNormalTableWidthAndSetCellWidth(cloums, cellWidth) {
+      cloums.forEach(item => {
+        if (!item.width) {
+          item.width = cellWidth;
+        }
+      });
+      return cloums;
+    },
     getScrollBarWidth() {
       let el = this.$refs.tableContent;
       return el.offsetWidth - el.clientWidth;
-    }
+    },
   },
   computed: {
     tableWrapStyle() {
@@ -188,6 +198,10 @@ export default {
       }
       return style;
     }
+  },
+  components: {
+    cell,
+    headerCell
   }
 };
 </script>

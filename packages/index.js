@@ -10,6 +10,11 @@ import WShowMore from './show-more/index'
 import WLimitTextArea from './limit-textarea/index'
 import MetaInfo from './meta-info/index'
 import WAlert from './alert/index'
+import E8Checkbox from './Checkbox/index'
+import E8CheckboxGroup from './checkbox-group/index'
+import E8Radio from './radio/index'
+import E8RadioGroup from './radio-group/index'
+
 import WLoadingBar from './loading-bar/index'
 import Skeleton from './skeleton/index'
 import Input from './input/index'
@@ -23,15 +28,19 @@ const components = [ // 这里注册了就可以全局直接使用了，不用�
   E8Row,
   E8Col,
   E8Tag,
-  Input,
-  Select,
-  DatePicker,
-  AutoComplete,
-  Table,
   WShowMore,
   WLimitTextArea,
   WAlert,
-  Skeleton
+  Skeleton,
+  Input,
+  E8Checkbox,
+  E8CheckboxGroup,
+  E8Radio,
+  E8RadioGroup,
+  Select,
+  DatePicker,
+  AutoComplete,
+  Table
 ]
 
 const install = function (Vue) {
@@ -51,14 +60,18 @@ export default {
   E8Row,
   E8Col,
   E8Tag,
-  Input,
-  Select,
-  AutoComplete,
-  Table,
   WShowMore,
   WLimitTextArea,
   MetaInfo,
   WAlert,
   WLoadingBar,
-  Skeleton
+  Skeleton,
+  Input,
+  E8Checkbox,
+  E8CheckboxGroup,
+  E8Radio,
+  E8RadioGroup,
+  Select,
+  AutoComplete,
+  Table
 }

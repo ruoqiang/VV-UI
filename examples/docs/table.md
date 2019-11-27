@@ -11,8 +11,11 @@ export default {
     return {
       columns: [
         {
-          title: "姓名",
-          key: "name"
+          title: "全选",
+          key: "name",
+          type: "selection",
+          width:50,
+          align: "center"
         },
         {
           title: "年龄",
@@ -29,6 +32,12 @@ export default {
           key: "address",
           width: 250,
           align: "center"
+        },
+        {
+          title: "操作",
+          // key: "slot",
+          width: 100,
+          type: "slot"
         }
       ],
       columns2: [
@@ -68,7 +77,6 @@ export default {
           width: 250,
           align: "center"
         },
-        
         {
           title: "地址",
           key: "address",
@@ -217,7 +225,11 @@ export default {
   </div>
   <div class="m-10">
     <e8-row  type="flex" justify="space-between">
-      <e8-table :columns="columns" :data="data6" is-striped="true" ></e8-table>
+      <e8-table :columns="columns" :data="data6" is-striped="true" >
+        <template slot-scope="{ row, index }" slot="action">
+            <div >View</Button>
+        </template>
+      </e8-table>
     </e8-row>
       
   </div>
@@ -267,103 +279,20 @@ export default {
 ::: demo
 ```html
 <div>
- <e8-input :is-danger="true" placeholder="验证失败的颜色"></e8-input>
-  <e8-input :is-success="true" placeholder="验证通过的颜色"></e8-input>
+
 </div>
 ```
 :::
 
 ### 固定列
 <div class="demo-block">
-  <e8-input :disabled="true" placeholder="禁用"></e8-input>
    <div class="m-10">
-    <e8-input :disabled="false" placeholder="不禁用"></e8-input>
+   
   </div>
   
 </div>
 
-::: demo
-```html
-<div>
-  <e8-input :disabled="true" placeholder="禁用"></e8-input>
-  <e8-input :disabled="false" placeholder="不禁用"></e8-input>
-</div>
-```
-:::
 
-### 可编辑
-Input 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸默认中等尺寸。
-额外的尺寸：```large```、```small```，通过设置```size```属性来配置它们。
-
-<div class="demo-block">
-   <div class="m-10"><e8-input  placeholder="默认尺寸"></e8-input></div>
-   <div class="m-10"><e8-input size="large" placeholder="大尺寸"></e8-input></div>
-   <div class="m-10"><e8-input size="small" placeholder="小型尺寸"></e8-input></div>
-</div>
-
-::: demo
-```html
-<div>
-  <e8-input  placeholder="默认尺寸"></e8-input>
-  <e8-input size="large" placeholder="大尺寸"></e8-input>
-  <e8-input size="small" placeholder="小型尺寸"></e8-input>
-</div>
-```
-:::
-
-### 可横线滚动
-<div class="demo-block">
-  <e8-input placeholder="我是插槽的内容"><span slot="prepend">我是插槽的</span></e8-input>
-   <div class="m-10">
-    <e8-input  placeholder="我是插槽的内容2"><span slot="append">我是插槽的内容2</span></e8-input>
-  </div>
-</div>
-
-::: demo
-```html
-<div>
-  <e8-input placeholder="我是插槽的内容"><span slot="prepend">我是插槽的</span></e8-input>
-  <e8-input  placeholder="我是插槽的内容2"><span slot="append">我是插槽的内容2</span></e8-input>
-</div>
-```
-:::
-
-### 可多选
-<div class="demo-block">
- <e8-input placeholder="带label的输入框" label-text="姓名：" ></e8-input>
-   <div class="m-10">
-   <e8-input placeholder="带label的输入框" label-text="手机号码："></e8-input>
-  </div>
-  <div class="m-10">
-   <e8-input placeholder="label在输入框上面" label-text="手机号码：" :labelDirectionIsUp="true"></e8-input>
-  </div>
-</div>
-
-::: demo
-```html
-<div>
-  <e8-input placeholder="带label的输入框" label-text="姓名："></e8-input>
-   <e8-input placeholder="带label的输入框" label-text="手机号码："></e8-input>
-   <e8-input placeholder="带label的输入框" label-text="手机号码：" :labelDirectionIsUp="true"></e8-input>
-</div>
-```
-:::
-
-### textarea文本框
-<div class="demo-block">
- <e8-input :is-textarea="true"  :textareaMinHeight="120" labelText="dd:" value="ee"></e8-input>
- <e8-input :is-textarea="true"  :textareaMinHeight="120" labelText="回复：" value="你好。。" :labelDirectionIsUp="true"></e8-input>
-   
-</div>
-
-::: demo
-```html
-<div>
-   <e8-input :is-textarea="true" :disabled="true" value="ee"></e8-input>
-   <e8-input :is-textarea="true" :textareaMinHeight="120" labelText="回复：" value="你好。。" :labelDirectionIsUp="true"></e8-input>
-</div>
-```
-:::
 
 ### Attributes
 
@@ -380,13 +309,10 @@ Input 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 
 
 
-### Input events
+### events
 
 
 | 事件名      | 说明    | 返回值      |
 |---------- |:--------:|---------- |
-| on-focus  |获得焦点时事件 | 无   | 
-| on-blur  |失去得焦点时事件 | 无   | 
-| on-input  |input值改变时事件 | input的值   | 
-| on-clear  |clear时事件 | 无   | 
-| on-keyup  |keyup(输入框focus时按下键盘任意一个键)时事件 | input的值   | 
+
+

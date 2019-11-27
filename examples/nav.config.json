@@ -94,6 +94,16 @@
           "path": "/skeleton"
         },
         {
+          "desc": "radio 单选框",
+          "name": "radio",
+          "path": "/radio"
+        },
+        {
+          "desc": "checkbox 复选框",
+          "name": "checkbox",
+          "path": "/checkbox"
+        },
+        {
           "desc": "input 输入框",
           "name": "input",
           "path": "/input"

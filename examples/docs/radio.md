@@ -1,7 +1,7 @@
-# Radio 输入框
+# Radio 单选框
 ----
 ### 基础用法
-使用输入框原来的`type`属性来定义输入框类型。
+
 
 <script>
   //验证例子组件的可用性
@@ -9,7 +9,8 @@
 export default {
   data() {
     return {
-      radioList: [{"id":"1","name":"上海"},{"id":"2","name":"北京","disabled":true},{"id":"3","name":"杭州","selected":true,"disabled":true},{"id":"4","name":"上海4"}],
+      radioList: [{"id":"1","name":"上海"},{"id":"2","name":"北京","disabled":true},{"id":"3","name":"杭州","selected":true,"disabled":true},{"id":"4","name":"上海4"}
+      ,{"id":"5","name":"上海5"}],
       radioSelected:{}
     };
   },
@@ -35,24 +36,16 @@ export default {
   <div> 默认非选中</div>
   <div class="m-10">
   <e8-row  type="flex" justify="space-between">
-      <e8-col ><e8-radio >上海</e8-radio></e8-col>
+      <e8-col ><e8-radio >上海</e8-radio><e8-radio >上海2</e8-radio><e8-radio >上海3</e8-radio></e8-col>
   </e8-row>
   </div>
   <div> 默认选中</div>
    <div class="m-10">
        <e8-row  type="flex" justify="space-between">
-      <e8-col ><e8-radio :value="true">上海2</e8-radio></e8-col>
+       <e8-col ><e8-radio :value="true">上海2</e8-radio></e8-col>
   </e8-row>   
   </div>
-  <div> 默认选中</div>
-   <div class="m-10">
-       <e8-row  type="flex" justify="space-between">
-      <e8-col ><e8-radio-group :data="radioList" @change="radioGroupChange"></e8-radio-group></e8-col>
-  </e8-row>
-    <div class="m-10">
-        {{radioSelected.name}}
-    </e8-row>   
-  </div>   
+    
   </div>
  
 </div>
@@ -60,11 +53,36 @@ export default {
 ::: demo
 ```html
 <div>
-  <!-- <e8-input placeholder='文本框'></e8-input>
-  <e8-input type='number' value="value10" placeholder="数字框"></e8-input>
-   <e8-input type='password' placeholder="密码框"></e8-input>
-  <e8-input type='tel' value="value9" placeholder="手机号码"></e8-input>
-  <e8-input type='tel'  :clearable="true" value='带清除图标的输入框'   placeholder="带清除图标的输入框"></e8-input> -->
+  <e8-radio >上海</e8-radio><e8-radio >上海2</e8-radio><e8-radio >上海3</e8-radio>
+  <e8-radio :value="true">上海2</e8-radio>
+  ...
+</div>
+```
+:::
+### 组合用法
+<div class="demo-block">
+    <div class="m-10" style="height:60px;">
+        <e8-row  type="flex" justify="space-between">
+            <e8-col ><e8-radio-group :data="radioList" @change="radioGroupChange"></e8-radio-group></e8-col>
+        </e8-row>
+        <div class="m-10">
+            已选择：{{radioSelected.name}}
+        </e8-row>   
+      </div> 
+    </div> 
+</div> 
+
+::: demo
+```html
+js
+ data() {
+    return {
+      radioList: [{"id":"1","name":"上海"},{"id":"2","name":"北京","disabled":true},{"id":"3","name":"杭州","selected":true,"disabled":true},{"id":"4","name":"上海4"}
+      ,{"id":"5","name":"上海5"}]
+    };
+  },
+<div>
+  <e8-radio-group :data="radioList" @change="radioGroupChange"></e8-radio-group>
   ...
 </div>
 ```
@@ -75,16 +93,7 @@ export default {
 
 | 参数      | 说明    | 类型      |可选值       | 默认值   |
 |---------- |-------- |---------- |:----------:|-------- |
-| focus  |默认值 | String   |  —  |  —  |
-| type     | 类型   | String    |   text,password,number等原生input的type |     —    |
-| size     | 尺寸   | String  |   default,large,small            |    —     |
-| is-danger     | 是否警告颜色   | Boolean    | — | false   |
-| is-success     | 是否通过颜色   | Boolean    | — | false   |
-| disabled  | 是否禁用状态    | Boolean   | —   | false   |
-| clearable  |是否带清除图标 | Boolean   |  —  |  false  |
-| label-text  |label文本 | String   |  —  |  —   |
-| is-textarea  |是否为textarea,其他属性基本跟Input组件一致 | Boolean   |  —  |  false   |
-
+| data  |组合单选时的数据 | Array   |  —  |  —  |
 
 
 ### Input events

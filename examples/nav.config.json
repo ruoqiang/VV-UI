@@ -92,6 +92,17 @@
           "desc": "skeleton 骨架屏",
           "name": "skeleton",
           "path": "/skeleton"
+        }
+      ]
+    },
+    {
+      "desc": "我的组件",
+      "path": "/component",
+      "items": [
+        {
+          "desc": "switch 开关",
+          "name": "switch",
+          "path": "/switch"
         },
         {
           "desc": "radio 单选框",

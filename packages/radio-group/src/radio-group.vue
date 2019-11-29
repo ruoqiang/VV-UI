@@ -7,13 +7,10 @@
         class="radiobox-input"
         type="checkbox"
         :disabled="item.disabled"
-        
         @change="change(item)"
       />
     </span>
-    <slot>
-      {{item.name}}
-    </slot>
+    <span class="slot-text"><slot>{{item.name}}</slot></span>
   </label>
   </div>
 </template>

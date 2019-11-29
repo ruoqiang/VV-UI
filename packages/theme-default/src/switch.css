@@ -1,0 +1,72 @@
+@import "./common/var.css";
+.e8-switch {
+  width: 44px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 22px;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all .2s ease-in-out;
+  &.checked{
+    border-color: #2d8cf0;
+    background-color: #2d8cf0;
+    &:after{
+      right: 3px;
+      }
+    & .e8-switch-inner{
+      left:5px;
+    }
+  }
+  &.not-checked{
+    &:after{
+      left: 3px;
+      }
+    }
+    & .e8-switch-inner{
+      right: 5px;
+    }
+  &.large{
+    width: 53px;
+    height: 22px;
+    line-height: 20px;
+    & .e8-switch-inner{
+      top:1px;
+      } 
+    }
+  &.small{
+    width: 28px;
+    height: 16px;
+    line-height: 16px;
+    &:after{
+      width: 12px;
+      height: 12px;
+      } 
+    }
+    
+  &:after{
+    position: absolute;
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius:50%;
+    top:2px;
+  }
+  .e8-switch-inner{
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top:0px;
+  }
+  &.disabled {
+    cursor: not-allowed;
+    opacity: .4;
+  }
+}

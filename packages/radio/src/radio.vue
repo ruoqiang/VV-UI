@@ -1,5 +1,5 @@
 <template>
-  <label class="radiobox-wrapper" :class="checkboxWrapperClass">
+  <label class="radiobox-wrapper singleRadioWrap" :class="checkboxWrapperClass">
     <span class="radiobox">
       <span class="radiobox-inner" :class="checkboxInnerClass"></span>
       <input
@@ -10,9 +10,7 @@
         @change="change"
       />
     </span>
-    <slot>
-      
-    </slot>
+    <span class="slot-text"><slot></slot></span>
   </label>
 </template>
 <script>

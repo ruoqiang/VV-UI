@@ -4640,46 +4640,59 @@ table.border thead tr th {
   --------------------------*/
 }
 :after, :before {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+}
+.e8-Radio-group {
+    height: 20px;
+    font-size: 0;
+    display: -ms-flexbox;
+    display: flex;
 }
 .radiobox-wrapper {
-    display: inline-block;
+    display: -ms-flexbox;
+    display: flex;
     cursor: pointer;
+    /* align-content:center; */
     font-size: 14px;
     margin-right: 8px;
+    margin-bottom: 3px;
+    font-size: 0;
+}
+.slot-text {
+    font-size: 14px;
+    height: 14px;
 }
 .radiobox-wrapper.disable {
     cursor: not-allowed;
 }
 .radiobox {
-    display: inline-block;
-    vertical-align: middle;
     white-space: nowrap;
     cursor: pointer;
-    line-height: 1;
+    display: block;
     position: relative;
-    box-sizing: border-box;
+    width: 17px;
+    height: 17px;
+    /* box-sizing: border-box; */
+    font-size: 14px;
 }
 .radiobox-inner {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
+    display: block;
+    width: 14px;
+    height: 14px;
     position: relative;
-    top: 0;
-    left: 0;
     background-color: #fff;
     border: 1px solid #dcdee2;
     border-radius: 50%;
     transition: all .2s ease-in-out;
 }
 .radiobox-input {
-    width: 100%;
-    height: 100%;
+    width: 16px;
+    height: 16px;
     position: absolute;
     top: 0;
-    bottom: 0;
+    /* bottom: 0; */
     left: 0;
-    right: 0;
+    /* right: 0; */
     z-index: 1;
     cursor: pointer;
     opacity: 0;
@@ -4695,36 +4708,44 @@ table.border thead tr th {
 }
 .radiobox-checked .radiobox-inner {
     background: #fff;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
+    display: block;
+    width: 14px;
+    height: 14px;
     position: relative;
-    top: 0;
-    left: 0;
     border: 1px solid #2d8cf0;
     border-radius: 50%;
     transition: all .2s ease-in-out;
 }
 .radiobox-inner:after {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     left: 50%;
     top: 50%;
-    margin-left: -5px;
-    margin-top: -5px;
+    /* margin-left: -5px;
+    margin-top: -5px; */
     -ms-transform-origin: center;
         transform-origin: center;
     border-radius: 50%;
     content: " ";
     background-color: #2d8cf0;
-    -ms-transform: scale(0);
-        transform: scale(0);
+    transform: translate3d(-50%,-50%,0) scale(0);
+    /* position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 2px;
+    top: 2px;
+    border-radius: 6px;
+    border-top: 0;
+    border-left: 0;
+    content: " ";
+    background-color: #2d8cf0; */
+    /* transform: scale(0); */
 }
 .radiobox-checked .radiobox-inner:after {
-    -ms-transform: scale(1);
-        transform: scale(1);
+    /* transform: scale(1); */
+    transform: translate3d(-50%,-50%,0) scale(1);
     transition: all .2s ease-in-out;
 }
 .radiobox-checked.disable .radiobox-inner:after {
@@ -4748,5 +4769,165 @@ table.border thead tr th {
 }
 .radiobox-input:disabled {
     cursor: not-allowed;
+}
+:root {
+    /* Transition
+  -------------------------- */
+    /* Colors
+  -------------------------- */
+    /* Link
+  -------------------------- */
+    /* Border
+  -------------------------- */
+    /* Box-shadow
+  -------------------------- */
+    /* Fill
+  -------------------------- */
+    /* Font
+  -------------------------- */
+    /* Size
+  -------------------------- */
+    /* z-index
+  -------------------------- */
+    /* Disable base
+  -------------------------- */
+    /* Icon
+  -------------------------- */
+    /* Checkbox
+  -------------------------- */
+    /* Radio
+  -------------------------- */
+    /* LimitTeaxtarea
+  ------------------------------------------*/
+    /* Select
+  -------------------------- */
+    /* Alert
+  -------------------------- */
+    /* Message Box
+  -------------------------- */
+    /* Message
+  -------------------------- */
+    /* Notification
+  -------------------------- */
+    /* Input
+  -------------------------- */
+    /* Cascader
+  -------------------------- */
+    /* Group
+  -------------------------- */
+    /* Tab
+  -------------------------- */
+    /* Button
+  -------------------------- */
+    /* cascader
+  -------------------------- */
+    /* Switch
+ -------------------------- */
+    /* Dialog
+ -------------------------- */
+    /* Table
+ -------------------------- */
+    /* Pagination
+ -------------------------- */
+    /* Popover
+ -------------------------- */
+    /* Tooltip
+  -------------------------- */
+    /* Tag
+  -------------------------- */
+    /* Dropdown
+  -------------------------- */
+    /* Badge
+  -------------------------- */
+    /* Card
+  --------------------------*/
+    /* Slider
+  --------------------------*/
+    /* Steps
+  --------------------------*/
+    /* Menu
+  --------------------------*/
+    /* Rate
+  --------------------------*/
+    /* DatePicker
+  --------------------------*/
+    /* Loading
+  --------------------------*/
+    /* Scrollbar
+  --------------------------*/
+    /* Carousel
+  --------------------------*/
+    /* Collapse
+  --------------------------*/
+    /* Transfer
+  --------------------------*/
+}
+.e8-switch {
+    width: 44px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 22px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all .2s ease-in-out;
+}
+.e8-switch .e8-switch-inner {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 0px;
+}
+.e8-switch.checked {
+    border-color: #2d8cf0;
+    background-color: #2d8cf0;
+}
+.e8-switch.checked:after {
+    right: 3px;
+}
+.e8-switch.checked .e8-switch-inner {
+    left: 5px;
+}
+.e8-switch.not-checked {}
+.e8-switch.not-checked:after {
+    left: 3px;
+}
+.e8-switch .e8-switch-inner {
+    right: 5px;
+}
+.e8-switch.large {
+    width: 53px;
+    height: 22px;
+    line-height: 20px;
+}
+.e8-switch.large .e8-switch-inner {
+    top: 1px;
+}
+.e8-switch.small {
+    width: 28px;
+    height: 16px;
+    line-height: 16px;
+}
+.e8-switch.small:after {
+    width: 12px;
+    height: 12px;
+}
+.e8-switch:after {
+    position: absolute;
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    top: 2px;
+}
+.e8-switch.disabled {
+    cursor: not-allowed;
+    opacity: .4;
 }
 

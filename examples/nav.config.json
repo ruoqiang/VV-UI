@@ -100,6 +100,11 @@
       "path": "/component",
       "items": [
         {
+          "desc": "message 提示",
+          "name": "message",
+          "path": "/message"
+        },
+        {
           "desc": "switch 开关",
           "name": "switch",
           "path": "/switch"

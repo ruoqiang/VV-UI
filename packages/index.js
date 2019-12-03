@@ -15,7 +15,10 @@ import E8CheckboxGroup from './checkbox-group/index'
 import E8Radio from './radio/index'
 import E8RadioGroup from './radio-group/index'
 import E8Switch from './switch/index'
+import E8Message from './message/index'
 
+
+import myAlert from './message/src/alert'
 import WLoadingBar from './loading-bar/index'
 import Skeleton from './skeleton/index'
 import Input from './input/index'
@@ -35,6 +38,7 @@ const components = [ // 这里注册了就可以全局直接使用了，不用�
   Skeleton,
   Input,
   E8Switch,
+  E8Message,
   E8Checkbox,
   E8CheckboxGroup,
   E8Radio,
@@ -51,6 +55,8 @@ const install = function (Vue) {
   MetaInfo.install(Vue)
   Vue.prototype.$loading = WLoadingBar  // 然后可以全局使用this.$loading.start()
   Vue.prototype.$alert = WAlert  // 然后可以全局使用
+
+  Vue.prototype.$myAlert = myAlert
 }
 /* 支持使用标签的方式引入 */
 if (typeof window !== 'undefined' && window.Vue) {
@@ -71,6 +77,7 @@ export default {
   Skeleton,
   Input,
   E8Switch,
+  E8Message,
   E8Checkbox,
   E8CheckboxGroup,
   E8Radio,

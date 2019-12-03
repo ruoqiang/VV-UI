@@ -1,15 +1,18 @@
 <template>
-  <div class="e8-switch" :class="[size,wrapClasses]" @click="change" :style="wrapStyles">
+ <transition name="e8-message-fade" @after-leave="handleAfterLeave">
+   <div class="e8-switch" :class="[size,wrapClasses]" @click="change" :style="wrapStyles">
     <span class="e8-switch-inner">
       <slot name="open" v-if="currentValue"></slot>
       <slot name="close" v-if="!currentValue"></slot>
     </span>
   </div>
+ </transition>
+  
 </template>
 
 <script>
 export default {
-  name: "E8Switch",
+  name: "E8Message",
   props: {
     disabled: {
       type: Boolean,
@@ -55,7 +58,11 @@ export default {
       }
       this.currentValue = !this.currentValue;
       this.$emit("change",this.currentValue);
-    }
+    },
+    handleAfterLeave() {
+        this.$destroy(true);
+        this.$el.parentNode.removeChild(this.$el);
+      },
   }
 };
 </script>

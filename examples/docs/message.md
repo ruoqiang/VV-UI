@@ -19,36 +19,27 @@ export default {
     change(val) {
        console.log(val)
        this.$loading.start()
-    }
+    },
+     handleOpen1 (val) {
+       let text = val ? '打开的': '关闭的'
+        this.$myAlert.info({
+          content: `我是${text}提示信息`,
+          index:111111
+        });
+      },
   },
 }
 </script>
 
-# switch 开关
+# message 提示
 ----
 ### 基础用法
 
 <div class="demo-block">
-  <e8-switch :value="true" @change="change">
-    <span slot="open">开</span>
-    <span slot="close">关</span>
-  </e8-switch>
-  <e8-switch size="large">
+  <e8-switch size="large" @change="handleOpen1">
       <span slot="open">打开</span>
       <span slot="close">关闭</span>
     </e8-switch>
-    <e8-switch size="small">
-      <span slot="open"></span>
-      <span slot="close"></span>
-    </e8-switch>
-    <e8-switch size="small" :disabled="true">
-      <span slot="open"></span>
-      <span slot="close"></span>
-    </e8-switch>
-    <e8-switch :value="true" @change="change" :width="width">
-    <span slot="open">打开开</span>
-    <span slot="close">关关关</span>
-  </e8-switch>
 </div>
 
 ::: demo

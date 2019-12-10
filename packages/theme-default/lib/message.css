@@ -89,8 +89,9 @@
   --------------------------*/
   /* Transfer
   --------------------------*/
+  
 }
-.e8-switch {
+.e8-message {
   width: 44px;
   height: 22px;
   line-height: 22px;
@@ -104,57 +105,15 @@
   -ms-user-select: none;
   user-select: none;
   transition: all .2s ease-in-out;
+  
 }
-.e8-switch .e8-switch-inner{
-  color: #fff;
-  font-size: 12px;
-  position: absolute;
-  top:0px;
+
+.e8-message-fade-enter, .e8-message-fade-leave-active {
+  opacity: 0;
+  -ms-transform: translate(-50%, -100%);
+      transform: translate(-50%, -100%);
 }
-.e8-switch.checked {
-  border-color: #2d8cf0;
-  background-color: #2d8cf0;
-}
-.e8-switch.checked:after {
-  right: 3px;
-}
-.e8-switch.checked .e8-switch-inner {
-  left: 5px;
-}
-.e8-switch.not-checked {}
-.e8-switch.not-checked:after {
-  left: 3px;
-}
-.e8-switch .e8-switch-inner {
-  right: 5px;
-}
-.e8-switch.large {
-  width: 53px;
-  height: 22px;
-  line-height: 20px;
-}
-.e8-switch.large .e8-switch-inner {
-  top: 1px;
-}
-.e8-switch.small {
-  width: 28px;
-  height: 16px;
-  line-height: 16px;
-}
-.e8-switch.small:after {
-  width: 12px;
-  height: 12px;
-}
-.e8-switch:after {
-  position: absolute;
-  content: '';
-  width: 18px;
-  height: 18px;
-  background: #fff;
-  border-radius: 50%;
-  top: 2px;
-}
-.e8-switch.disabled {
-  cursor: not-allowed;
-  opacity: .4;
+.alert-main{
+  
+  pointer-events: none;
 }

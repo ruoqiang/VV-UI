@@ -2473,6 +2473,47 @@ li {
 .e8-icon-close2:before {
     content: "\e6dd";
 }
+@font-face {
+    font-family: "iconfont2";
+    src: url('fonts2/iconfont.eot?t=1575961692320');
+    /* IE9 */
+    src: url('fonts2/iconfont.eot?t=1575961692320#iefix') format('embedded-opentype'), 
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAT8AAsAAAAACcgAAASvAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDSAqGPIVpATYCJAMYCw4ABCAFhG0HVRucCFGUL0qF7EvIyYYXgRCQoLQYDuc4AIAbe957iJePBk1EdKOyEP016wgF4uH/x5j3fUNcI90TnphU8TwPZYmltUrpO110UtfypIh4/mF8HxHRCmKlTfulkr80j8osOoyMjGwME6xssOIrK1drQyVUhpIfukmHRMjUXUySS2Jo7bS+hoL2v/kA6gb4zxHYAANf/yfG2SSm7eFGqU3x31FOAq7T//99i9u8wNZrWS7vtq4b/RPFcUAB1SzrSjYDEo+gDgiI59JeGKjfNxPoNs/Pc9IzxIM0haoJGl4bugzSIlalgBM6DS3jxCK+SNaZPu8JcOv8fvwRjTSSmqm3un7arYK27/WWvv3AXN63350bu9PI2AUU4lOm9w3oZXdB3Ze/wDkF9OqUlO+r5lBip5YOEaUaDL3avzySkBWVaND2StZ5rvJ91TBLF905ZoHuBrOM7hYRhR/PhlTQOtxhCPAfiK9UycWLB99SZLm3d043DXFGqrdrsizfemh7c+tU56khcEti5jpjIucSpQIhi4shJTjUvHxfPTUk+Ar6zfSwkOvRYAMtNOwWE15MsTI2KSP6JiE8yMYZ4+8gabyhemjNG1rHQ26+hyRlQLlD6uZAl4zBc+3OAz6YN80yYwZwwTxXP2uqKulmQ747NwHh6KYj6WjlmLAMxQItoh1xHZhRxZtbYxs1hEqlp7VgsylrCC0/HFUY1wFCIjm0NUQAhqvK50NN1eUWkQQE1RWrsNOBCfDXC46DJyz1wxYFQijNyp+OTY8sKhHuVMHg1mwe3Kqn8Vi2FxKYTWgFtHflEgggUjMjZCqDFux1Yhby/+dQzW4RpXzo3qM6XCM8c//1bSeA+AesEnHqDbmzqbp33b1zqEYkUgq5f4cj4FG2zfhcXFUBH8K5SzRpDNiCu/hAig3rLSxiOrAIOhHcWxXiOKX0K+1JwNWA179qa8wbKBqv+PxEVZXHA0WB4/EgoV/V1qg3SDRe9uUQn4hLiYLGC39zbrl2T40nrzNV48bLyTHNHp18vGuO01vtwe9M17pyc3OrXfmenUeE1mlsURI+KFhdvkWXL9vH9cLnQtBXG9x9gqjatshIUNJYC77rBaPalYhSXlZZeRulGya3D6tgDgB8HwJo36Ed0HZ3fwQvQRcAMkHff8fNWE9LUy236Vt9WmYB38bqcyiaS/9TOpVlfz5f8fhtFFeFamvlLDMoEdDENIdbaVfqbm2Gv1xw2JvQj1WuJ3QaCyDpMAdZp1VaYe1C1WMPmk770G1H7+k9RlBQlC5sO1EgDLqHpN8dZIOeaYX1CtW4X2gGA0K3myi8YI/1MDI6KZYZVtHyBjIU4mi6g2W4jRNYT1gyDSscroipayRQJBiOF3qxg2kXh7irepQxDWmU2KhHuR22LILilKxghQVjjMUbQiEt65uCCrFBhmMUJmMwFbJsA2JQEA7Nms9kJH5+AqZLsMhowcSLuAijXMbySERQuAKtV+tUmjiV17hW6aIYRoNoKMKG9ChuzNKyBBLP3m4FpmCCYg3ScQ1CYppWVRscXm+/ywvQTX1RixQ5StRo0aE+soiLU5jsxGSSamciKWrCCHe6CUXBrgsAAA==') format('woff2'),
+  url('fonts2/iconfont.woff?t=1575961692320') format('woff'),
+  url('fonts2/iconfont.ttf?t=1575961692320') format('truetype'), 
+  url('fonts2/iconfont.svg?t=1575961692320#iconfont') format('svg');
+    /* iOS 4.1- */
+}
+[class^="e8-icon2-"], [class*=" e8-icon2-"] {
+    font-family: "iconfont2" !important;
+    font-size: 18px;
+    font-style: normal;
+    vertical-align: baseline;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* display: block;
+    height: 100px;
+    line-height: 100px;
+    font-size: 42px;
+    margin: 10px auto;
+    color: #333; */
+}
+.e8-icon2-close:before {
+    content: "\e64c";
+}
+.e8-icon2-tanhao:before {
+    content: "\e624";
+}
+.e8-icon2-tanhao1:before {
+    content: "\e656";
+}
+.e8-icon2-duihao:before {
+    content: "\e68f";
+}
+.e8-icon2-success:before {
+    content: "\e767";
+}
 :root {
     /* Transition
   -------------------------- */
@@ -5022,7 +5063,7 @@ table.border thead tr th {
     /* Transfer
   --------------------------*/
 }
-.e8-switch {
+.e8-message {
     width: 44px;
     height: 22px;
     line-height: 22px;
@@ -5037,56 +5078,11 @@ table.border thead tr th {
     user-select: none;
     transition: all .2s ease-in-out;
 }
-.e8-switch .e8-switch-inner {
-    color: #fff;
-    font-size: 12px;
-    position: absolute;
-    top: 0px;
+.e8-message-fade-enter, .e8-message-fade-leave-active {
+    opacity: 0;
+    -ms-transform: translate(-50%, -100%);
+        transform: translate(-50%, -100%);
 }
-.e8-switch.checked {
-    border-color: #2d8cf0;
-    background-color: #2d8cf0;
-}
-.e8-switch.checked:after {
-    right: 3px;
-}
-.e8-switch.checked .e8-switch-inner {
-    left: 5px;
-}
-.e8-switch.not-checked {}
-.e8-switch.not-checked:after {
-    left: 3px;
-}
-.e8-switch .e8-switch-inner {
-    right: 5px;
-}
-.e8-switch.large {
-    width: 53px;
-    height: 22px;
-    line-height: 20px;
-}
-.e8-switch.large .e8-switch-inner {
-    top: 1px;
-}
-.e8-switch.small {
-    width: 28px;
-    height: 16px;
-    line-height: 16px;
-}
-.e8-switch.small:after {
-    width: 12px;
-    height: 12px;
-}
-.e8-switch:after {
-    position: absolute;
-    content: '';
-    width: 18px;
-    height: 18px;
-    background: #fff;
-    border-radius: 50%;
-    top: 2px;
-}
-.e8-switch.disabled {
-    cursor: not-allowed;
-    opacity: .4;
+.alert-main {
+    pointer-events: none;
 }

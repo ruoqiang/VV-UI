@@ -20,13 +20,44 @@ export default {
        console.log(val)
        this.$loading.start()
     },
-     handleOpen1 (val) {
+    //  handleOpen1 (val) {
+    //    let text = val ? '打开的': '关闭的'
+    //     this.$myAlert.info({
+    //       content: `我是${text}提示信息`,
+    //       index:111111
+    //     });
+    //   },
+      handleOpen1 (val) {
        let text = val ? '打开的': '关闭的'
-        this.$myAlert.info({
+        this.$myAlert.success({
           content: `我是${text}提示信息`,
           index:111111
         });
       },
+      messageInfo() {
+        this.$myAlert.info({
+          content: `我是info提示信息`,
+          index:111111
+        });
+      },
+      successInfo() {
+        this.$myAlert.success({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      },
+      warningInfo() {
+        this.$myAlert.warning({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      },
+      errorInfo() {
+        this.$myAlert.error({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      }
   },
 }
 </script>
@@ -40,6 +71,10 @@ export default {
       <span slot="open">打开</span>
       <span slot="close">关闭</span>
     </e8-switch>
+    <e8-button type="info" @click="messageInfo">普通提示</e8-button>
+    <e8-button type="success" @click="successInfo">成功提示</e8-button>
+    <e8-button type="warning" @click="warningInfo">警告提示</e8-button>
+    <e8-button type="danger" @click="errorInfo">危险提示</e8-button>
 </div>
 
 ::: demo

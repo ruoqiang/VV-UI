@@ -1,11 +1,20 @@
 <script>
   var iconList = require('../icon.json');
-
+  var iconList2 = require('../../packages/theme-default/src/fonts2/iconfont.json')
+   
+console.log(iconList2)
+   
   export default {
     data() {
       return {
-        icons: iconList
+        icons: iconList,
+        icons2:iconList2
       };
+    },
+    computed: {
+      icon2Class() {
+        return 
+      }
     }
   }
 </script>
@@ -98,3 +107,21 @@
     </span>
   </li>
 </ul>
+
+### 图标示例2
+
+<ul class="icon-list">
+  <li v-for="item in icons2.glyphs" :key="item.font_class">
+    <span>
+      <i :class="'e8-icon2-' + item['font_class']"></i>
+      e8-icon2-{{item.font_class}}
+    </span>
+  </li>
+  <!-- <span class="e8-icon2-close">
+    </span> -->
+</ul>
+
+### 自己如何添加自定义图标
+
+- 1.登录阿里图标库 [`https://www.iconfont.cn/home/index`](https://www.iconfont.cn/home/index) ,选择自己想要的图标，或者设计给到上传上去
+- 2.添加到项目后下载拷贝到项目中，参照packages/theme-default/src/fonts与packages/theme-default/src/icon.css修改好，并新增配置gulpfile.js拷贝图标文件

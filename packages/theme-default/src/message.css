@@ -18,7 +18,11 @@
 }
 
 .e8-message-fade-enter,
-.e8-message-leave-active {
+.e8-message-fade-leave-active {
   opacity: 0;
   transform: translate(-50%, -100%);
+}
+.alert-main{
+  
+  pointer-events: none;
 }

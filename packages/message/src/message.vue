@@ -1,5 +1,5 @@
 <template>
- <transition name="e8-message-fade" @after-leave="handleAfterLeave">
+ <transition name="e8-message" @after-leave="handleAfterLeave">
    <div class="e8-switch" :class="[size,wrapClasses]" @click="change" :style="wrapStyles">
     <span class="e8-switch-inner">
       <slot name="open" v-if="currentValue"></slot>

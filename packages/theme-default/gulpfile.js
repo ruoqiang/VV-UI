@@ -39,8 +39,13 @@ gulp.task('copyfont', function () {
     // .pipe(cssmin())
     .pipe(gulp.dest('./lib/fonts'))
 })
-
-gulp.task('build', ['compile', 'copyfont'])
+gulp.task('copyfont2', function () {
+  return gulp.src('./src/fonts2/**')
+    .on('error', handleErrors)
+    // .pipe(cssmin())
+    .pipe(gulp.dest('./lib/fonts2'))
+})
+gulp.task('build', ['compile', 'copyfont', 'copyfont2'])
 gulp.task('watch', function () {
   gulp.watch('./src/*.css', ['compile'])
 })

@@ -6,17 +6,27 @@ function getMessageInstance() {
     messageInstance = messageInstance || Notification.newInstance()
     return messageInstance
 }
-function notice({ duration = 1.5, content = '', index }) {
+function notice({ duration = 1.5, content = '', index, type }) {
     let instance = getMessageInstance() // 每一个实例添加属性
     instance.add({
         content,
         duration,
-        index
+        index,
+        type
     })
 }
 export default {
     info(options) {
-        return notice(options)
+        return notice(options, Object.assign(options, {type: 'info'}))
+    },
+    success (options) {
+        return notice(Object.assign(options, {type: 'success'}))
+    },
+    warning (options) {
+        return notice(Object.assign(options, {type: 'warning'}))
+    },
+    error (options) {
+        return notice(Object.assign(options, {type: 'error'}))
     }
 }
 

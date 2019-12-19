@@ -31,7 +31,7 @@
 
 ```js
 import E8UI from 'e8ui' // 引入组件库
-import '../node_modules/e8ui/packages/theme-default/lib/index.css' // 引入样式库
+import 'e8ui/packages/theme-default/lib/index.css' // 引入样式库
 
 Vue.use(E8UI)
 ```

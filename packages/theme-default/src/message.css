@@ -1,4 +1,10 @@
 @import "./common/var.css";
+:root {
+  --color-success-background: #d86f6f;
+  --color-success-border-color: #ffc2c2;
+}
+
+
 .e8-message {
   width: 44px;
   height: 22px;
@@ -14,15 +20,68 @@
   -ms-user-select: none;
   user-select: none;
   transition: all .2s ease-in-out;
-  
 }
 
-.e8-message-fade-enter,
+/* .e8-message-fade-enter,
 .e8-message-fade-leave-active {
   opacity: 0;
   transform: translate(-50%, -100%);
+} */
+.list-enter-active, .list-leave-active {
+  transition: all 2s;
+  opacity: 1;
+  transform: translateY(0px);
 }
-.alert-main{
-  
+.list-enter, .list-leave-to
+/* .list-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(300px);
+}
+.e8-alert-main{
   pointer-events: none;
+}
+.e8-alert {
+  position: fixed;
+  width: 100%;
+  top: 16px;
+  left: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+
+
+.e8-alert-content {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 8px;
+  pointer-events: all;
+  font-size: 14px;
+  &.info{
+    i{color: #2d8cf0;}
+  }
+  &.success{
+    background: #f3fdf7;
+    border: 1px solid #b0efcb;
+    .e8-alert-icon{color: var(--color-success);}
+    .e8-alert-text{color: var(--color-success);}
+  }
+  &.warning{
+    background: #faf6ef;
+    border: 1px solid #f9e3b4;
+    .e8-alert-icon{color: var(--color-warning);}
+    .e8-alert-text{color: var(--color-warning);}
+  }
+  &.error{
+    background: #fce9e9;
+    border: 1px solid #ffc2c2;
+    .e8-alert-icon{color: var(--color-danger);}
+    .e8-alert-text{color: var(--color-danger);}
+  }
+}
+.e8-alert-icon{
+  font-size: 14px;
 }

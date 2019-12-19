@@ -144,7 +144,7 @@ export default {
           // document.removeEventListener("click", handler, true);
         };
         
-        document.addEventListener("click", handler, true);
+        document.addEventListener("click", handler, true); //true事件由外往内传递，false为冒泡
       } 
     },
     clickSelectWrap() {

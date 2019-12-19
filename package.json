@@ -29,6 +29,7 @@
     "semver": "^5.4.1",
     "transliteration": "^1.6.2",
     "vue": "^2.5.2",
+    "vue-create-api": "^0.2.3",
     "vue-markdown-loader": "^2.2.3",
     "vue-router": "^3.0.1"
   },

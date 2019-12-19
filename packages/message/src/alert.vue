@@ -1,13 +1,12 @@
 <template>
-  <div class="alert" :style="wrapStyles">
-    <transition-group name="e8-message-fade">
-    <div class="alert-main" v-for="item in notices" :key="item.name" :class="item.name">
-      
-      <div class="alert-content">
-          <i class="alert-icon" :class="iconClass(item.type)"></i>
-          <span class="alert-text">{{ item.content }}</span>
+  <div class="e8-alert" :style="wrapStyles">
+    
+    <transition-group name="list"  tag="div" class="e8-alert-main" v-for="item in notices" :key="item.name" :class="item.name">
+      <div class="e8-alert-content" :class="item.type" :key="item.name" >
+          <i class="e8-alert-icon" :class="iconClass(item.type)"></i>
+          <span class="e8-alert-text">{{ item.content }}</span>
         </div>
-    </div>
+        
     </transition-group>
   </div>
 </template>
@@ -22,10 +21,10 @@ const iconTypes = {
   success: 'e8-icon2-duihao',//"ios-checkmark-circle",
   warning: "e8-icon2-tanhao1",
   error: "e8-icon2-close",
-  loading: "ios-loading"
+  loading: "e8-icon2-loading"
 };
 export default {
-  //Alert 组件不同于常规的组件使用方式，它最终是通过 JS 来调用的，因此组件不用预留 props 和 events 接口。
+  //Alert 组件不同于常规的组件使用方式，它最终是通过 JS 来调用的，因此组件不用预留 props 和 events 接口。 -->  实例化后newInstance就是一个对象了，所以data内的数据会 挂载到this下，传入一个对象与之合并
 
   // 只要给数组 notices 增加数据，这个提示组件就能显示内容了，
 
@@ -45,22 +44,22 @@ export default {
       this.notices.push(_notice);
       // 定时移除，单位：秒
       const duration = notice.duration;
-      // setTimeout(()=> {
-      //     this.remove(name)
-      // }, duration* 1000  )
+      setTimeout(()=> {
+          this.remove(name)
+      }, duration* 1000  )
         this.currentNotice = _notice //保存当前添加的实例配置，方便下面计算样式使用
     },
     remove(name) {
       for (let i = 0; i < this.notices.length; i++) {
         if (this.notices[i]["name"] === name) {
-          //  this.notices = this.notices.splice(i,i)
+          //  this.notices = this.notices.splice(i,i) //这样使用会多个message整体一起消失
           this.notices.splice(i, i);
           break;
         }
       }
       if (this.notices.length <= 1) {
         //   document.body.removeChild(document.getElementsByClassName('alert')[0]);
-        document.getElementsByClassName("alert")[0].innerHTML = "";
+        document.getElementsByClassName("e8-alert")[0].innerHTML = "";
       }
     },
     iconClass(val) {
@@ -88,23 +87,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.alert {
-  position: fixed;
-  width: 100%;
-  top: 16px;
-  left: 0;
-  text-align: center;
-  pointer-events: none;
-}
-.alert-content {
-  display: inline-block;
-  padding: 8px 16px;
-  background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  margin-bottom: 8px;
-  pointer-events: all;
-}
-</style>

@@ -1,262 +1,158 @@
 :root {
-
   /* Transition
   -------------------------- */
-
   /* Colors
   -------------------------- */
-
   /* Link
   -------------------------- */
-
   /* Border
   -------------------------- */
-
   /* Box-shadow
   -------------------------- */
-
   /* Fill
   -------------------------- */
-
   /* Font
   -------------------------- */
-
   /* Size
   -------------------------- */
-
   /* z-index
   -------------------------- */
-
   /* Disable base
   -------------------------- */
-
   /* Icon
   -------------------------- */
-
   /* Checkbox
   -------------------------- */
-
   /* Radio
   -------------------------- */
-
   /* LimitTeaxtarea
   ------------------------------------------*/
-
   /* Select
   -------------------------- */
-
   /* Alert
   -------------------------- */
-
   /* Message Box
   -------------------------- */
-
   /* Message
   -------------------------- */
-
   /* Notification
   -------------------------- */
-
   /* Input
   -------------------------- */
-
   /* Cascader
   -------------------------- */
-
   /* Group
   -------------------------- */
-
   /* Tab
   -------------------------- */
-
   /* Button
   -------------------------- */
-
   /* cascader
   -------------------------- */
-
   /* Switch
  -------------------------- */
-
   /* Dialog
  -------------------------- */
-
   /* Table
  -------------------------- */
-
   /* Pagination
  -------------------------- */
-
   /* Popover
  -------------------------- */
-
   /* Tooltip
   -------------------------- */
-
   /* Tag
   -------------------------- */
-
   /* Dropdown
   -------------------------- */
-
   /* Badge
   -------------------------- */
-
   /* Card
   --------------------------*/
-
   /* Slider
   --------------------------*/
-
   /* Steps
   --------------------------*/
-
   /* Menu
   --------------------------*/
-
   /* Rate
   --------------------------*/
-
   /* DatePicker
   --------------------------*/
-
   /* Loading
   --------------------------*/
-
   /* Scrollbar
   --------------------------*/
-
   /* Carousel
   --------------------------*/
-
   /* Collapse
   --------------------------*/
-
   /* Transfer
   --------------------------*/
 }
-
-
-.e8-message {
-  width: 44px;
-  height: 22px;
-  line-height: 22px;
-  border-radius: 22px;
-  vertical-align: middle;
-  border: 1px solid #ccc;
-  background-color: #ccc;
-  position: relative;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  transition: all .2s ease-in-out;
-}
-
-/* .e8-message-fade-enter,
-.e8-message-fade-leave-active {
-  opacity: 0;
-  transform: translate(-50%, -100%);
-} */
-.list-enter-active, .list-leave-active {
-  transition: all 2s;
-  opacity: 1;
-  -ms-transform: translateY(0px);
-      transform: translateY(0px);
-}
-.list-enter, .list-leave-to
-/* .list-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-  -ms-transform: translateY(300px);
-      transform: translateY(300px);
-}
-.e8-alert-main{
-  pointer-events: none;
-}
-.e8-alert {
+.confirm {
   position: fixed;
-  width: 100%;
-  top: 16px;
   left: 0;
-  text-align: center;
-  pointer-events: none;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.3);
 }
-
-
-
-.e8-alert-content {
-  display: inline-block;
-  padding: 8px 16px;
+.confirm .confirm-wrapper {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  z-index: 999;
+  width: 270px;
+}
+.confirm .confirm-wrapper .confirm-content {
+  width: 100%;
+  border-radius: 6px;
   background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  margin-bottom: 8px;
-  pointer-events: all;
-  font-size: 14px
 }
-
-
-
-.e8-alert-content.info i {
-  color: #2d8cf0;
+.confirm .confirm-wrapper .confirm-content .text {
+  padding: 19px 15px;
+  line-height: 22px;
+  text-align: center;
+  font-size: 18px;
+  color: #515a6e;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-
-
-.e8-alert-content.success {
-  background: #f3fdf7;
-  border: 1px solid #b0efcb;
+.confirm .confirm-wrapper .confirm-content .modal-middle{
+  padding: 25px 15px;
 }
-
-
-
-.e8-alert-content.success .e8-alert-icon {
-  color: #13ce66;
+.confirm .confirm-wrapper .confirm-content .operate {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  text-align: center;
+  font-size: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-
-
-.e8-alert-content.success .e8-alert-text {
-  color: #13ce66;
+.confirm .confirm-wrapper .confirm-content .operate .operate-btn {
+  -ms-flex: 1;
+      flex: 1;
+  line-height: 22px;
+  padding: 10px 0;
+  color: #515a6e
 }
-
-
-
-.e8-alert-content.warning {
-  background: #faf6ef;
-  border: 1px solid #f9e3b4;
+.confirm .confirm-wrapper .confirm-content .operate .operate-btn.left {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-
-
-.e8-alert-content.warning .e8-alert-icon {
-  color: #f7ba2a;
+.confirm.confirm-fade-enter-active {
+  animation: confirm-fadein 0.3s;
 }
-
-
-
-.e8-alert-content.warning .e8-alert-text {
-  color: #f7ba2a;
+.confirm.confirm-fade-enter-active .confirm-content {
+  animation: confirm-zoom 0.3s;
 }
-
-
-
-.e8-alert-content.error {
-  background: #fce9e9;
-  border: 1px solid #ffc2c2;
+@keyframes confirm-fadein {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
-
-
-
-.e8-alert-content.error .e8-alert-icon {
-  color: #ff4949;
-}
-
-
-
-.e8-alert-content.error .e8-alert-text {
-  color: #ff4949;
-}
-.e8-alert-icon{
-  font-size: 14px;
+@keyframes confirm-zoom {
+  0% {transform: scale(0.5);}
+  50% {transform: scale(1.02);}
+  100% {transform: scale(1);}
 }

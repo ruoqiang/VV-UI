@@ -20,40 +20,33 @@ export default {
        console.log(val)
        this.$loading.start()
     },
-    //  handleOpen1 (val) {
-    //    let text = val ? '打开的': '关闭的'
-    //     this.$myAlert.info({
-    //       content: `我是${text}提示信息`,
-    //       index:111111
-    //     });
-    //   },
       handleOpen1 (val) {
        let text = val ? '打开的': '关闭的'
-        this.$myAlert.success({
+        this.$Message.success({
           content: `我是${text}提示信息`,
           index:111111
         });
       },
       messageInfo() {
-        this.$myAlert.info({
+        this.$Message.info({
           content: `我是info提示信息`,
           index:111111
         });
       },
       successInfo() {
-        this.$myAlert.success({
+        this.$Message.success({
           content: `我是success提示信息`,
           index:111111
         });
       },
       warningInfo() {
-        this.$myAlert.warning({
+        this.$Message.warning({
           content: `我是success提示信息`,
           index:111111
         });
       },
       errorInfo() {
-        this.$myAlert.error({
+        this.$Message.error({
           content: `我是success提示信息`,
           index:111111
         });
@@ -74,41 +67,75 @@ export default {
     <e8-button type="info" @click="messageInfo">普通提示</e8-button>
     <e8-button type="success" @click="successInfo">成功提示</e8-button>
     <e8-button type="warning" @click="warningInfo">警告提示</e8-button>
-    <e8-button type="danger" @click="errorInfo">危险提示</e8-button>
+    <e8-button type="danger" @click="errorInfo">错误提示</e8-button>
 </div>
 
 ::: demo
+```js
+js
+handleOpen1 (val) {
+       let text = val ? '打开的': '关闭的'
+        this.$Message.success({
+          content: `我是${text}提示信息`,
+          index:111111
+        });
+      },
+      messageInfo() {
+        this.$Message.info({
+          content: `我是info提示信息`,
+          index:111111
+        });
+      },
+      successInfo() {
+        this.$Message.success({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      },
+      warningInfo() {
+        this.$Message.warning({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      },
+      errorInfo() {
+        this.$Message.error({
+          content: `我是success提示信息`,
+          index:111111
+        });
+      }
+```
 ```html
-
-<e8-switch :value="true">
-    <span slot="open">开</span>
-    <span slot="close">关</span>
-  </e8-switch>
-  <e8-switch size="large">
+html
+    <e8-switch size="large" @change="handleOpen1">
       <span slot="open">打开</span>
       <span slot="close">关闭</span>
     </e8-switch>
-    <e8-switch size="small">
-      <span slot="open"></span>
-      <span slot="close"></span>
-    </e8-switch>
-    <e8-switch size="small" :disabled="true">
-      <span slot="open"></span>
-      <span slot="close"></span>
-    </e8-switch>
+    <e8-button type="info" @click="messageInfo">普通提示</e8-button>
+    <e8-button type="success" @click="successInfo">成功提示</e8-button>
+    <e8-button type="warning" @click="warningInfo">警告提示</e8-button>
+    <e8-button type="danger" @click="errorInfo">错误提示</e8-button>
 
 ```
 :::
 
+## Message instance #
+通过直接调用以下方法来使用组件：
+
+`this.$Message.info(config)`
+
+`this.$Message.success(config)`
+
+`this.$Message.warning(config)`
+
+`this.$Message.error(config)`
 
 ## API
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 类型 | Boolean |  true/false | false |
-| width | 类型 | String/Number |  字符串/数字| — |
-| size | 类型 | String |  `primary`, `large`, `small`| primary |
-| disabled | 禁用切换| Boolean | — | false |
+| content | 提示内容 | String |  — | — |
+| duration | 自动关闭的延时，单位秒 | Number |  数字| — |
 
 
 ## Tag 事件

@@ -32,7 +32,7 @@ npm install e8-ui --save
 
 ```js
 import E8Ui from 'e8-ui' // 引入组件库
-import 'e8ui/packages/theme-default/lib/index.css' // 引入样式库
+import 'e8-ui/packages/theme-default/lib/index.css' // 引入样式库
 
 Vue.use(E8Ui)
 ```
